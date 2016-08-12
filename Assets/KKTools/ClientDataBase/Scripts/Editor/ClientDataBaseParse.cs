@@ -295,7 +295,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
         }
 
         string path = ClientDataBaseConfig.ScriptableAssetPath + scriptableAssetName;
-        UtilityEditor.CreateFolder(path);
+        UtilityEditor.CreateFolder(ClientDataBaseConfig.ScriptableAssetPath);
 
         Object _Object = ScriptableObject.CreateInstance(script.GetClass());
         AssetDatabase.CreateAsset(_Object, path);

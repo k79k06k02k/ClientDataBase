@@ -35,7 +35,7 @@ public static class ClientDataBaseConfig
     /// <summary>
     /// Scriptable Script 存放路徑
     /// </summary>
-    public const string ScriptableScriptsPath = ROOT + "Generate/Scriptable/Scripts/";
+    public const string ScriptableScriptsPath = ROOT + "Generate/Scriptable/Script/";
 
     /// <summary>
     /// Scriptable Editor Script 存放路徑

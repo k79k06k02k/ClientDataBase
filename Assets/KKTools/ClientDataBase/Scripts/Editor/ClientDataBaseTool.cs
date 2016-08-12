@@ -223,7 +223,6 @@ public class ClientDataBaseTool : EditorWindow
     {
         foreach (Object go in objList)
         {
-            string path = AssetDatabase.GetAssetPath(go);
             ScriptableObjectBase script = (ScriptableObjectBase)go;
 
             if (script.LoadGameTable() == false)
