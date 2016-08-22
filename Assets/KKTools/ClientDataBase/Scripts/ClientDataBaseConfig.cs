@@ -30,7 +30,7 @@ public static class ClientDataBaseConfig
     /// <summary>
     /// Scriptable Asset 存放路徑
     /// </summary>
-    public const string ScriptableAssetPath = ROOT + "Generate/Scriptable/Asset/";
+    public const string ScriptableAssetPath = ROOT + "Generate/Resources/ClientDataBase/";
 
     /// <summary>
     /// Scriptable Script 存放路徑
@@ -83,4 +83,24 @@ public static class ClientDataBaseConfig
     /// </summary>
     public const string FILE_EXTENSION_ASSET = ".asset";
 
+
+    public static string GetTableClassScriptName(string fileName, bool isExtension = false)
+    {
+        return ClassNamePrefix + fileName + (isExtension ? FILE_EXTENSION_CS : "");
+    }
+
+    public static string GetScriptableScriptName(string fileName, bool isExtension = false)
+    {
+        return ClassNamePrefix + fileName + ScripTableScriptSuffix + (isExtension ? FILE_EXTENSION_CS : "");
+    }
+
+    public static string GetScriptableScriptEditorName(string fileName, bool isExtension = false)
+    {
+        return ClassNamePrefix + fileName + ScripTableEditorSuffix + (isExtension ? FILE_EXTENSION_CS : "");
+    }
+
+    public static string GetScriptableAssetName(string fileName, bool isExtension = false)
+    {
+        return ClassNamePrefix + fileName + ScripTableAssetSuffix + (isExtension ? FILE_EXTENSION_ASSET : "");
+    }
 }

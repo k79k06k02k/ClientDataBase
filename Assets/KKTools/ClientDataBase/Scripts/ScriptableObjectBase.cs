@@ -4,7 +4,7 @@
 **********************************************************/
 using UnityEngine;
 
-public abstract class ScriptableObjectBase : ScriptableObject
+public abstract class ScriptableObjectBase : ScriptableObject 
 {
     public abstract bool LoadGameTable();
 }

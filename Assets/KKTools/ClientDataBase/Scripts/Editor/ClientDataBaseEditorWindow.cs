@@ -1,6 +1,6 @@
-﻿/**********************************************************
+/**********************************************************
 // Author   : K.(k79k06k02k)
-// FileName : ClientDataBaseTool.cs
+// FileName : ClientDataBaseEditorWindow.cs
 **********************************************************/
 using UnityEngine;
 using UnityEditor;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-public class ClientDataBaseTool : EditorWindow
+public class ClientDataBaseEditorWindow : EditorWindow
 {
     //按下執行按鈕
     bool isExecuteButtonClick = false;
@@ -17,6 +17,9 @@ public class ClientDataBaseTool : EditorWindow
 
     //一次執行的開始
     bool isStartCreate = false;
+
+    //是否是更新全部
+    bool isUpdateAll = false;
 
     //等待 Application Compiling Script
     bool isNeedToAttach = false;
@@ -32,16 +35,29 @@ public class ClientDataBaseTool : EditorWindow
     Vector2 scrollPos;
     GUIStyle BtnStyle;
 
-    [MenuItem("Window/Client DataBase Tool")]
-    [MenuItem("Assets/Client DataBase Tool")]
+    [MenuItem("KKTools/Client DataBase Tool")]
+    [MenuItem("Assets/Client DataBase Tool", false, 110)]
     public static void ShowWindow()
     {
-        EditorWindow editorWindow = EditorWindow.GetWindow(typeof(ClientDataBaseTool));
+        EditorWindow editorWindow = EditorWindow.GetWindow(typeof(ClientDataBaseEditorWindow));
         editorWindow.position = new Rect(editorWindow.position.xMin + 100f, editorWindow.position.yMin + 100f, 400f, 400f);
         editorWindow.autoRepaintOnSceneChange = true;
         editorWindow.Show();
         editorWindow.titleContent = new GUIContent("Client DataBase Tool");
     }
+
+    [MenuItem("KKTools/Client DataBase Update All")]
+    [MenuItem("Assets/Client DataBase Update All", false, 110)]
+    public static void UpdateAll()
+    {
+        ClientDataBaseEditorWindow window = EditorWindow.GetWindow<ClientDataBaseEditorWindow>();
+        window.isUpdateAll = true;
+        window.isStartCreate = true;
+        window.isExecuteButtonClick = true;
+        window.objList = UtilityEditor.LoadAllAssetsAtPath(ClientDataBaseConfig.GameTablePath).ToList();
+        window.CreateAsset();
+    }
+
 
     void Update()
     {
@@ -58,8 +74,8 @@ public class ClientDataBaseTool : EditorWindow
                     {
                         string path = AssetDatabase.GetAssetPath(go);
                         string fileName = Path.GetFileNameWithoutExtension(path);
-                        string scriptableScriptName = ClientDataBaseConfig.ClassNamePrefix + fileName + ClientDataBaseConfig.ScripTableScriptSuffix + ClientDataBaseConfig.FILE_EXTENSION_CS;
-                        string scriptableAssetName = ClientDataBaseConfig.ClassNamePrefix + fileName + ClientDataBaseConfig.ScripTableAssetSuffix + ClientDataBaseConfig.FILE_EXTENSION_ASSET;
+                        string scriptableScriptName = ClientDataBaseConfig.GetScriptableScriptName(fileName, true);
+                        string scriptableAssetName = ClientDataBaseConfig.GetScriptableAssetName(fileName, true);
 
                         nowCount++;
                         UpdateProgressBar("Generate Scriptable Assets", string.Format("[File Name:{0}]", scriptableAssetName));
@@ -72,6 +88,9 @@ public class ClientDataBaseTool : EditorWindow
                     isNeedToAttach = false;
                     waitForCompile = 1;
                     EditorUtility.ClearProgressBar();
+
+                    if (isUpdateAll)
+                        this.Close();
                 }
             }
         }
@@ -110,7 +129,7 @@ public class ClientDataBaseTool : EditorWindow
         GUILayout.Space(10);
 
         //還沒開始時才需要抓物件
-        if (isStartCreate == false)
+        if (isStartCreate == false && isUpdateAll == false)
             objList = Selection.objects.ToList();
 
 
@@ -121,9 +140,14 @@ public class ClientDataBaseTool : EditorWindow
                 objList.Remove(objList[i]);
         }
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Choose GameTable Asset", EditorStyles.boldLabel);
-        EditorGUILayout.LabelField("Count : " + objList.Count, EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Choose GameTable Asset", EditorStyles.boldLabel, GUILayout.Width(200));
+        EditorGUILayout.LabelField("Count : " + objList.Count, EditorStyles.boldLabel, GUILayout.Width(100));
+        if (GUILayout.Button("Update All"))
+        {
+            UpdateAll();
+        }
         EditorGUILayout.EndHorizontal();
+        GUILayout.Space(10);
 
         if (objList.Count == 0)
         {

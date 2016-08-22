@@ -114,5 +114,28 @@ public class UtilityEditor
         GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Loading...", LableStyle);
     }
 
+    /// <summary>
+    /// 讀取路徑下所有資料
+    /// </summary>
+    /// <param name="path">路徑</param>
+    public static Object[] LoadAllAssetsAtPath(string path)
+    {
+        if (path.EndsWith("/"))
+        {
+            path = path.TrimEnd('/');
+        }
+        string[] GUIDs = AssetDatabase.FindAssets("", new string[] { path });
+        Object[] objectList = new Object[GUIDs.Length];
+        for (int index = 0; index < GUIDs.Length; index++)
+        {
+            string guid = GUIDs[index];
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            Object asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(Object)) as Object;
+            objectList[index] = asset;
+        }
+
+        return objectList;
+    }
+
 }
 

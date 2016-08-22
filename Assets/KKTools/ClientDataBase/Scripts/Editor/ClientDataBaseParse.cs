@@ -31,10 +31,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
     }
 
     string tableName;
-    string className;
-    string scriptableName;
-    string scriptableEditorName;
-
+    
 
     /// <summary>
     /// 讀取GameTable(.txt)
@@ -42,10 +39,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
     public bool LoadGameTable(Object obj)
     {
         tableName = obj.name;
-        className = ClientDataBaseConfig.ClassNamePrefix + tableName;
-        scriptableName = className + ClientDataBaseConfig.ScripTableScriptSuffix;
-        scriptableEditorName = className + ClientDataBaseConfig.ScripTableEditorSuffix;
-
+     
         string strTemp;
         TextAsset data = (TextAsset)obj;
         TextReader reader = null;
@@ -143,7 +137,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
         if (string.IsNullOrEmpty(templateDataClass))
             return false;
 
-        templateDataClass = templateDataClass.Replace("$ClassName", className);
+        templateDataClass = templateDataClass.Replace("$ClassName", ClientDataBaseConfig.GetTableClassScriptName(tableName));
 
         StringBuilder field = new StringBuilder();
 
@@ -170,14 +164,14 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
 
 
         UtilityEditor.CreateFolder(ClientDataBaseConfig.TableClassPath);
-        using (var writer = new StreamWriter(ClientDataBaseConfig.TableClassPath + className + ClientDataBaseConfig.FILE_EXTENSION_CS))
+        using (var writer = new StreamWriter(ClientDataBaseConfig.TableClassPath + ClientDataBaseConfig.GetTableClassScriptName(tableName, true)))
         {
             writer.Write(templateDataClass);
             writer.Close();
         }
 
         AssetDatabase.Refresh();
-        Debug.Log(string.Format("[TableClass] is Create.\nFile:[{0}] Path:[{1}]", className + ClientDataBaseConfig.FILE_EXTENSION_CS, ClientDataBaseConfig.TableClassPath));
+        Debug.Log(string.Format("[TableClass] is Create.\nFile:[{0}] Path:[{1}]", ClientDataBaseConfig.GetTableClassScriptName(tableName, true), ClientDataBaseConfig.TableClassPath));
 
         return true;
     }
@@ -192,9 +186,9 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
         if (string.IsNullOrEmpty(template))
             return false;
 
-        template = template.Replace("$ScriptableName", scriptableName);
+        template = template.Replace("$ScriptableName", ClientDataBaseConfig.GetScriptableScriptName(tableName));
         template = template.Replace("$GameTableName", tableName);
-        template = template.Replace("$ClassName", className);
+        template = template.Replace("$ClassName", ClientDataBaseConfig.GetTableClassScriptName(tableName));
         template = template.Replace("$GameTablePath", "Config.GameTablePath + GameTableName + Config.FILE_EXTENSION_TXT");
 
 
@@ -241,14 +235,14 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
 
 
         UtilityEditor.CreateFolder(ClientDataBaseConfig.ScriptableScriptsPath);
-        using (var writer = new StreamWriter(ClientDataBaseConfig.ScriptableScriptsPath + scriptableName + ClientDataBaseConfig.FILE_EXTENSION_CS))
+        using (var writer = new StreamWriter(ClientDataBaseConfig.ScriptableScriptsPath + ClientDataBaseConfig.GetScriptableScriptName(tableName, true)))
         {
             writer.Write(template);
             writer.Close();
         }
 
         AssetDatabase.Refresh();
-        Debug.Log(string.Format("[Scriptable Script] is Create.\nFile:[{0}] Path:[{1}]", scriptableName + ClientDataBaseConfig.FILE_EXTENSION_CS, ClientDataBaseConfig.ScriptableScriptsPath));
+        Debug.Log(string.Format("[Scriptable Script] is Create.\nFile:[{0}] Path:[{1}]", ClientDataBaseConfig.GetScriptableScriptName(tableName, true), ClientDataBaseConfig.ScriptableScriptsPath));
 
         return true;
     }
@@ -263,19 +257,19 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
         if (string.IsNullOrEmpty(templateScriptable))
             return false;
 
-        templateScriptable = templateScriptable.Replace("$ScriptableEditorName", scriptableEditorName);
-        templateScriptable = templateScriptable.Replace("$ScriptableName", scriptableName);
+        templateScriptable = templateScriptable.Replace("$ScriptableEditorName", ClientDataBaseConfig.GetScriptableScriptEditorName(tableName));
+        templateScriptable = templateScriptable.Replace("$ScriptableName", ClientDataBaseConfig.GetScriptableScriptName(tableName));
 
 
         UtilityEditor.CreateFolder(ClientDataBaseConfig.ScriptableEditorPath);
-        using (var writer = new StreamWriter(ClientDataBaseConfig.ScriptableEditorPath + scriptableEditorName + ClientDataBaseConfig.FILE_EXTENSION_CS))
+        using (var writer = new StreamWriter(ClientDataBaseConfig.ScriptableEditorPath + ClientDataBaseConfig.GetScriptableScriptEditorName(tableName, true)))
         {
             writer.Write(templateScriptable);
             writer.Close();
         }
 
         AssetDatabase.Refresh();
-        Debug.Log(string.Format("[Scriptable Script Editor] is Create.\nFile:[{0}] Path:[{1}]", scriptableEditorName + ClientDataBaseConfig.FILE_EXTENSION_CS, ClientDataBaseConfig.ScriptableEditorPath));
+        Debug.Log(string.Format("[Scriptable Script Editor] is Create.\nFile:[{0}] Path:[{1}]", ClientDataBaseConfig.GetScriptableScriptEditorName(tableName, true), ClientDataBaseConfig.ScriptableEditorPath));
 
         return true;
     }

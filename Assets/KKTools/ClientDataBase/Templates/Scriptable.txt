@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+
+#if UNITY_EDITOR
 using System.IO;
 using UnityEditor;
-using UnityEngine;
+#endif
 
 [Serializable]
 public class Dictionary$ClassName : SerializableDictionary<string, $ClassName> { }
@@ -10,10 +13,11 @@ public class Dictionary$ClassName : SerializableDictionary<string, $ClassName> {
 
 public class $ScriptableName : ScriptableObjectBase
 {
-    public string GameTableName = "$GameTableName";
+    public static string GameTableName = "$GameTableName";
 	public List<$ClassName> m_TableList = new List<$ClassName>();
 	public Dictionary$ClassName m_TableDict = new Dictionary$ClassName();
 
+#if UNITY_EDITOR
 	string path;
 
 	public override bool LoadGameTable()
@@ -74,6 +78,9 @@ $DataLoad
 
 		Debug.Log(string.Format("[{0}] GameTable Asset Dictionary is Update. Source:[{1}]", this.name, path));
     }
+#else
+    public override bool LoadGameTable() { return false; }
+#endif
 
     public $ClassName GetData(string id)
     {
