@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+#if UNITY_EDITOR
+using System.IO;
+using UnityEditor;
+#endif
+
+[Serializable]
+public class Dictionary$ClassName : SerializableDictionary<string, $ClassName> { }
+
+
+public class $ScriptableName : ScriptableObjectBase
+{
+    public static string GameTableName = "$GameTableName";
+	public List<$ClassName> m_TableList = new List<$ClassName>();
+	public Dictionary$ClassName m_TableDict = new Dictionary$ClassName();
+
+#if UNITY_EDITOR
+	string path;
+
+	public override bool LoadGameTable()
+    {        
+		m_TableList.Clear();
+		m_TableDict.Clear();
+
+        path = ClientDataBaseConfig.GameTablePath + GameTableName + ClientDataBaseConfig.FILE_EXTENSION_TXT;
+
+        TextAsset data = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
+        StringReader reader = null;
+        int index = 0;
+        string strTemp;
+
+        if (data == null)
+        {
+            Debug.LogError(string.Format("Can't found GameTable txt file in [Path:{0}]", path));
+            return false;
+        }
+
+        reader = new StringReader(data.text);
+
+        if (reader != null)
+        {
+            while ((strTemp = reader.ReadLine()) != null)
+			{        
+				if (index <= 2)
+				{
+					index++;
+					continue;
+				}
+			        
+                string[] splitStr = strTemp.Split("\t"[0]);
+
+				$ClassName table = new $ClassName();
+$DataLoad
+                m_TableList.Add(table);
+
+                index++;
+            }
+
+            reader.Close();
+        }
+
+		MakeUpDictionary();
+
+		EditorUtility.SetDirty(this);
+		AssetDatabase.SaveAssets();
+
+        Debug.Log(string.Format("[{0}] GameTable Asset is Update. Source:[{1}]", this.name, path));
+		return true;
+    }
+
+	void MakeUpDictionary()
+    {
+        foreach ($ClassName item in m_TableList)
+            m_TableDict.Add(item.id, item);
+
+		Debug.Log(string.Format("[{0}] GameTable Asset Dictionary is Update. Source:[{1}]", this.name, path));
+    }
+#else
+    public override bool LoadGameTable() { return false; }
+#endif
+
+    public $ClassName GetData(string id)
+    {
+        if (m_TableDict.ContainsKey(id))
+        {
+            return m_TableDict[id];
+        }
+        else
+        {
+            Debug.LogWarning(string.Format("[{0}] GameTable Asset Dictionary Can't found key [{1}]", this.name, id));
+            return null;
+        }
+    }
+}
