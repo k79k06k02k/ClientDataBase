@@ -26,7 +26,7 @@ public class UtilityEditor
 
         if (System.IO.Directory.Exists(Application.dataPath + "/" + name))
         {
-            Debug.Log("Folder [ Assets/" + name + " ] is Exist!!");
+            //Debug.Log("Folder [ Assets/" + name + " ] is Exist!!");
             return false;
         }
         else
@@ -34,7 +34,7 @@ public class UtilityEditor
             System.IO.Directory.CreateDirectory(Application.dataPath + "/" + name);
             AssetDatabase.Refresh();
 
-            Debug.Log("Folder [ Assets/" + name + " ] is Create!!");
+            //Debug.Log("Folder [ Assets/" + name + " ] is Create!!");
             return true;
         }
     }

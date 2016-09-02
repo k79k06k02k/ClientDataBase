@@ -1,5 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/**********************************************************
+// Author   : K.(k79k06k02k)
+// FileName : ClientDataBaseConfigEditor.cs
+**********************************************************/
+using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(ClientDataBaseConfig))]
@@ -48,6 +51,8 @@ public class ClientDataBaseConfigEditor : Editor
         script.FileExtensionCS = DrawNormalField("File Extension CS", script.FileExtensionCS);
         script.FileExtensionASSET = DrawNormalField("File Extension ASSET", script.FileExtensionASSET);
         EditorGUILayout.EndVertical();
+
+        EditorUtility.SetDirty(script);
     }
 
     string DrawNormalField(string name, string field)

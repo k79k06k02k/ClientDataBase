@@ -53,9 +53,8 @@ public class ClientDataBaseEditorWindow : EditorWindow
         ClientDataBaseEditorWindow window = EditorWindow.GetWindow<ClientDataBaseEditorWindow>();
         window.isUpdateAll = true;
         window.isStartCreate = true;
-        window.isExecuteButtonClick = true;
         window.objList = UtilityEditor.LoadAllAssetsAtPath(ClientDataBaseConfigTool.Instance.m_Config.GetGameTablePath()).ToList();
-        window.CreateAsset();
+        window.isExecuteButtonClick = true;
     }
 
 
@@ -264,7 +263,7 @@ public class ClientDataBaseEditorWindow : EditorWindow
         switch (tabIndex)
         {
             case 0:
-                return extension != ClientDataBaseConfigTool.Instance.m_Config.FileExtensionTXT;
+                return extension != ClientDataBaseConfigTool.Instance.m_Config.FileExtensionTXT || ((TextAsset)obj).ToString().StartsWith(ClientDataBaseConfigTool.Instance.m_Config.GameTableCheck) == false;
 
             case 1:
                 return extension != ClientDataBaseConfigTool.Instance.m_Config.FileExtensionASSET || obj.name == ClientDataBaseConfigTool.Instance.m_Config.name;
@@ -285,7 +284,8 @@ public class ClientDataBaseEditorWindow : EditorWindow
         {
             case 0:
                 sb.Append("1.Asset in Project" + "\n");
-                sb.Append("2.Asset extension must [" + ClientDataBaseConfigTool.Instance.m_Config.FileExtensionTXT + "]");
+                sb.Append("2.Asset extension must [" + ClientDataBaseConfigTool.Instance.m_Config.FileExtensionTXT + "]" + "\n");
+                sb.Append("3.Asset content must table.");
                 break;
 
             case 1:

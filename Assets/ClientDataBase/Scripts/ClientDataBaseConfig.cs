@@ -3,6 +3,7 @@
 // FileName : ClientDataBaseConfig.cs
 **********************************************************/
 using UnityEngine;
+
 public class ClientDataBaseConfig : ScriptableObject
 {
     /// <summary>
@@ -11,7 +12,7 @@ public class ClientDataBaseConfig : ScriptableObject
     public string GameTableCheck = "##";
 
 
-    public string ROOT = "Assets/KKTools/ClientDataBase/";
+    public string ROOT = "Assets/ClientDataBase/";
 
     /// <summary>
     /// Script Templates 存放路徑

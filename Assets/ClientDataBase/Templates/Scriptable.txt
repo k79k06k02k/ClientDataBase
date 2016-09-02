@@ -1,5 +1,7 @@
+/*****************************************************************************/
+/****************** Auto Generate Script, Do Not Modify! *********************/
+/*****************************************************************************/
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -14,7 +16,6 @@ public class Dictionary$ClassName : SerializableDictionary<string, $ClassName> {
 public class $ScriptableName : ScriptableObjectBase
 {
     public static string GameTableName = "$GameTableName";
-	public List<$ClassName> m_TableList = new List<$ClassName>();
 	public Dictionary$ClassName m_TableDict = new Dictionary$ClassName();
 
 	ClientDataBaseConfig _ClientDataBaseConfig;
@@ -24,7 +25,6 @@ public class $ScriptableName : ScriptableObjectBase
 
 	public override bool LoadGameTable()
     {        
-		m_TableList.Clear();
 		m_TableDict.Clear();
 
 		_ClientDataBaseConfig = ClientDataBaseConfigTool.Instance.m_Config;
@@ -57,15 +57,13 @@ public class $ScriptableName : ScriptableObjectBase
 
 				$ClassName table = new $ClassName();
 $DataLoad
-                m_TableList.Add(table);
+                m_TableDict.Add(table.id, table);
 
                 index++;
             }
 
             reader.Close();
         }
-
-		MakeUpDictionary();
 
 		EditorUtility.SetDirty(this);
 		AssetDatabase.SaveAssets();
@@ -74,13 +72,6 @@ $DataLoad
 		return true;
     }
 
-	void MakeUpDictionary()
-    {
-        foreach ($ClassName item in m_TableList)
-            m_TableDict.Add(item.id, item);
-
-		Debug.Log(string.Format("[{0}] GameTable Asset Dictionary is Update. Source:[{1}]", this.name, path));
-    }
 #else
     public override bool LoadGameTable() { return false; }
 #endif
