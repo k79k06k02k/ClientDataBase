@@ -85,10 +85,42 @@ public class ClientDataBaseConfig : ScriptableObject
     public string FileExtensionASSET = ".asset";
 
 
-    public string GetTemplateName(string name)
+    public string GetTemplatePathName(string name)
     {
-        return ScriptTemplatesPath + name + FileExtensionTXT;
+        return ROOT + ScriptTemplatesPath + name + FileExtensionTXT;
     }
+
+    public string GetGameTablePathName(string name)
+    {
+        return ROOT + GameTablePath + name + FileExtensionTXT;
+    }
+
+    public string GetGameTablePath()
+    {
+        return ROOT + GameTablePath;
+    }
+
+    public string GetTableClassPath()
+    {
+        return ROOT + TableClassPath;
+    }
+
+    public string GetScriptableAssetPath()
+    {
+        return ROOT + ScriptableAssetPath;
+    }
+
+    public string GetScriptableScriptsPath()
+    {
+        return ROOT + ScriptableScriptsPath;
+    }
+
+    public string GetScriptableEditorPath()
+    {
+        return ROOT + ScriptableEditorPath;
+    }
+
+
 
     public string GetTableClassScriptName(string fileName, bool isExtension = false)
     {

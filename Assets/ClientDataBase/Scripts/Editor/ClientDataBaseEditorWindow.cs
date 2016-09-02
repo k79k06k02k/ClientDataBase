@@ -54,7 +54,7 @@ public class ClientDataBaseEditorWindow : EditorWindow
         window.isUpdateAll = true;
         window.isStartCreate = true;
         window.isExecuteButtonClick = true;
-        window.objList = UtilityEditor.LoadAllAssetsAtPath(ClientDataBaseParse.Instance.m_Config.GameTablePath).ToList();
+        window.objList = UtilityEditor.LoadAllAssetsAtPath(ClientDataBaseConfigTool.Instance.m_Config.GetGameTablePath()).ToList();
         window.CreateAsset();
     }
 
@@ -74,8 +74,8 @@ public class ClientDataBaseEditorWindow : EditorWindow
                     {
                         string path = AssetDatabase.GetAssetPath(go);
                         string fileName = Path.GetFileNameWithoutExtension(path);
-                        string scriptableScriptName = ClientDataBaseParse.Instance.m_Config.GetScriptableScriptName(fileName, true);
-                        string scriptableAssetName = ClientDataBaseParse.Instance.m_Config.GetScriptableAssetName(fileName, true);
+                        string scriptableScriptName = ClientDataBaseConfigTool.Instance.m_Config.GetScriptableScriptName(fileName, true);
+                        string scriptableAssetName = ClientDataBaseConfigTool.Instance.m_Config.GetScriptableAssetName(fileName, true);
 
                         nowCount++;
                         UpdateProgressBar("Generate Scriptable Assets", string.Format("[File Name:{0}]", scriptableAssetName));
@@ -156,7 +156,7 @@ public class ClientDataBaseEditorWindow : EditorWindow
         }
 
         //字母排序
-        objList.Sort(delegate(Object a, Object b)
+        objList.Sort(delegate (Object a, Object b)
         {
             return a.name.CompareTo(b.name);
         });
@@ -264,10 +264,10 @@ public class ClientDataBaseEditorWindow : EditorWindow
         switch (tabIndex)
         {
             case 0:
-                return extension != ClientDataBaseParse.Instance.m_Config.FileExtensionCS;
+                return extension != ClientDataBaseConfigTool.Instance.m_Config.FileExtensionTXT;
 
             case 1:
-                return extension != ClientDataBaseParse.Instance.m_Config.FileExtensionASSET || obj.name == ClientDataBaseParse.Instance.m_Config.name;
+                return extension != ClientDataBaseConfigTool.Instance.m_Config.FileExtensionASSET || obj.name == ClientDataBaseConfigTool.Instance.m_Config.name;
 
             default:
                 return true;
@@ -285,7 +285,7 @@ public class ClientDataBaseEditorWindow : EditorWindow
         {
             case 0:
                 sb.Append("1.Asset in Project" + "\n");
-                sb.Append("2.Asset extension must [" + ClientDataBaseParse.Instance.m_Config.FileExtensionTXT + "]");
+                sb.Append("2.Asset extension must [" + ClientDataBaseConfigTool.Instance.m_Config.FileExtensionTXT + "]");
                 break;
 
             case 1:

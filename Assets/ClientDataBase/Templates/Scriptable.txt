@@ -17,6 +17,8 @@ public class $ScriptableName : ScriptableObjectBase
 	public List<$ClassName> m_TableList = new List<$ClassName>();
 	public Dictionary$ClassName m_TableDict = new Dictionary$ClassName();
 
+	ClientDataBaseConfig _ClientDataBaseConfig;
+
 #if UNITY_EDITOR
 	string path;
 
@@ -25,7 +27,8 @@ public class $ScriptableName : ScriptableObjectBase
 		m_TableList.Clear();
 		m_TableDict.Clear();
 
-        path = ClientDataBaseConfig.GameTablePath + GameTableName + ClientDataBaseConfig.FILE_EXTENSION_TXT;
+		_ClientDataBaseConfig = ClientDataBaseConfigTool.Instance.m_Config;
+        path = _ClientDataBaseConfig.GetGameTablePathName(GameTableName);
 
         TextAsset data = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
         StringReader reader = null;
