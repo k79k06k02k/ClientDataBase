@@ -127,40 +127,40 @@ public Table[FileName] GetData(string id)
 	Unity Menu -> Assets -> Client DataBase -> Update All
 	
 	處理完成後會產生Generate資料夾，檔案結構如下
-  ```
-  Assets/ClientDataBase/
-      ├── Generate/     
-          ├── Resources/    
-              └── ClientDataBase/   
-                  └── TableSampleAsset.asset    --- Scriptable 資源
-  
-          ├── Scriptable/  
-              ├── Editor/   
-                  └── TableSampleScriptableEditor.cs    --- Scriptable 編輯程式碼
-              └── Script/   
-                  └── TableSampleScriptable.cs    --- Scriptable 程式碼
-  
-          └── TableClass/
-              └── TableSample.cs    --- 資料類別
-  ```
+	  ```
+	  Assets/ClientDataBase/
+	      ├── Generate/     
+	          ├── Resources/    
+	              └── ClientDataBase/   
+	                  └── TableSampleAsset.asset    --- Scriptable 資源
+	  
+	          ├── Scriptable/  
+	              ├── Editor/   
+	                  └── TableSampleScriptableEditor.cs    --- Scriptable 編輯程式碼
+	              └── Script/   
+	                  └── TableSampleScriptable.cs    --- Scriptable 程式碼
+	  
+	          └── TableClass/
+	              └── TableSample.cs    --- 資料類別
+	  ```
 
 5. 讀取 ScriptableObject 資源，使用 Key 取得資料
 
-```cs
-using UnityEngine;
-
-public class LoadTable : MonoBehaviour
-{
-    void Start()
-    {
-        TableSampleScriptable _TableSampleScriptable = Resources.Load<TableSampleScriptable>("ClientDataBase/TableSampleAsset");
-
-        TableSample _TableSample = _TableSampleScriptable.GetData("Sample001");
-        print(_TableSample.knowledge);
-        print(_TableSample.pos[0]);
-    }
-}
-```
+	```cs
+	using UnityEngine;
+	
+	public class LoadTable : MonoBehaviour
+	{
+	    void Start()
+	    {
+	        TableSampleScriptable _TableSampleScriptable = Resources.Load<TableSampleScriptable>("ClientDataBase/TableSampleAsset");
+	
+	        TableSample _TableSample = _TableSampleScriptable.GetData("Sample001");
+	        print(_TableSample.knowledge);
+	        print(_TableSample.pos[0]);
+	    }
+	}
+	```
 <br><br>
 
 #[作者網站](http://k79k06k02k.com/blog)<br>
