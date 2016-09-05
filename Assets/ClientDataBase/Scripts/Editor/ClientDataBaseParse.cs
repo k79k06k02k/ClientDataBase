@@ -47,7 +47,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
         TextReader reader = null;
 
         string[] _Summary = null;
-        string[] _Column = null;
+        string[] _Variable = null;
         string[] _Type = null;
         int index = 0;
 
@@ -78,7 +78,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
 
                 if (index == 1)
                 {
-                    _Column = strTemp.Split("\t"[0]);
+                    _Variable = strTemp.Split("\t"[0]);
                     index++;
                     continue;
                 }
@@ -101,16 +101,16 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
 
                     //2.判斷欄位數量是否一致
                     int count = _Summary.Length;
-                    if (count != _Column.Length || count != _Type.Length)
+                    if (count != _Variable.Length || count != _Type.Length)
                     {
                         Debug.LogError("GameTable column not same.");
                         break;
                     }
 
-                    if (CreateTableScript(_Summary, _Column, _Type) == false)
+                    if (CreateTableScript(_Summary, _Variable, _Type) == false)
                         return false;
 
-                    if (CreateScriptableScript(_Column, _Type) == false)
+                    if (CreateScriptableScript(_Variable, _Type) == false)
                         return false;
 
                     if (CreateScriptableScriptEditor() == false)
@@ -131,7 +131,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
     /// 建立 Table Class
     /// </summary>
     /// <returns>是否成功建立</returns>
-    bool CreateTableScript(string[] summary, string[] column, string[] type)
+    bool CreateTableScript(string[] summary, string[] variable, string[] type)
     {
         Dictionary<string, TableData> dataMap = new Dictionary<string, TableData>();
 
@@ -143,14 +143,14 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
 
         StringBuilder field = new StringBuilder();
 
-        for (int i = 0; i < column.Length; i++)
+        for (int i = 0; i < variable.Length; i++)
         {
             //透過字元 '[' ']' 判斷是否是Array 
-            bool isArray = Regex.Match(column[i], "[\\[\\]]").Success;
-            bool isEnd = i == column.Length - 1;
+            bool isArray = variable[i].EndsWith("[]");
+            bool isEnd = i == variable.Length - 1;
 
-            //如果是Array，去除中括號與中括號內數字
-            string fieldName = isArray ? Regex.Replace(column[i], "\\[[0-9]\\]", "") : column[i];
+            //如果是Array，去除中括號
+            string fieldName = isArray ? variable[i].Replace("[]", "") : variable[i];
 
             if (dataMap.ContainsKey(fieldName))
                 dataMap[fieldName].summary += ", " + summary[i];
@@ -182,7 +182,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
     /// 建立 Scriptable Script
     /// </summary>
     /// <returns>是否成功建立</returns>
-    bool CreateScriptableScript(string[] column, string[] type)
+    bool CreateScriptableScript(string[] variable, string[] type)
     {
         string template = GetTemplate("Scriptable");
         if (string.IsNullOrEmpty(template))
@@ -194,41 +194,41 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
         template = template.Replace("$GameTablePath", "Config.GameTablePath + GameTableName + Config.FILE_EXTENSION_TXT");
 
 
-        Dictionary<string, string> columnMap = new Dictionary<string, string>();
+        Dictionary<string, string> variableMap = new Dictionary<string, string>();
 
-        for (int i = 0; i < column.Length; i++)
+        for (int i = 0; i < variable.Length; i++)
         {
             string resultStr = string.Empty;
 
             //透過字元 '[' ']' 判斷是否是Array 
-            bool isArray = Regex.Match(column[i], "[\\[\\]]").Success;
+            bool isArray = variable[i].EndsWith("[]");
 
-            //如果是Array，去除中括號與中括號內數字
-            string fieldName = isArray ? Regex.Replace(column[i], "\\[[0-9]\\]", "") : column[i];
+            //如果是Array，去除中括號
+            string fieldName = isArray ? variable[i].Replace("[]", "") : variable[i];
 
 
             resultStr = GetDataClassDetial(i, fieldName, type[i], isArray);
 
 
             //如果名稱一樣(只會發生在複數Array)
-            if (columnMap.ContainsKey(fieldName))
+            if (variableMap.ContainsKey(fieldName))
             {
-                string oldStr = columnMap[fieldName];
+                string oldStr = variableMap[fieldName];
                 string element = Regex.Match(oldStr, "\\{[^\\}]*\\}").ToString().Trim(new char[] { '{', '}', ' ' });
 
                 string newStr = element + ", " + GetTypeDataClass(i, type[i]);
 
-                columnMap.Remove(fieldName);
-                columnMap.Add(fieldName, oldStr.Replace(element, newStr));
+                variableMap.Remove(fieldName);
+                variableMap.Add(fieldName, oldStr.Replace(element, newStr));
             }
             else
             {
-                columnMap.Add(fieldName, resultStr);
+                variableMap.Add(fieldName, resultStr);
             }
         }
 
         StringBuilder sb = new StringBuilder();
-        foreach (KeyValuePair<string, string> item in columnMap)
+        foreach (KeyValuePair<string, string> item in variableMap)
         {
             sb.Append(item.Value);
         }

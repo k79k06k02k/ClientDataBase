@@ -52,17 +52,17 @@ public class ClientDataBaseConfig : ScriptableObject
     public string ClassNamePrefix = "Table";
 
     /// <summary>
-    /// Scriptable Script 後綴
-    /// EX: Table[FileName]Scriptable
-    /// </summary>
-    public string ScriptableScriptSuffix = "Scriptable";
-
-    /// <summary>
     /// Scriptable Asset 後綴
     /// EX: Table[FileName]Asset
     /// </summary>
     public string ScriptableAssetSuffix = "Asset";
 
+    /// <summary>
+    /// Scriptable Script 後綴
+    /// EX: Table[FileName]Scriptable
+    /// </summary>
+    public string ScriptableScriptSuffix = "Scriptable";
+    
     /// <summary>
     /// Scriptable Editor 後綴
     /// EX: Table[FileName]ScriptableEditor

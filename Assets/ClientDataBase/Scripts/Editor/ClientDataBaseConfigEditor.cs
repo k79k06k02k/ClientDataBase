@@ -38,18 +38,9 @@ public class ClientDataBaseConfigEditor : Editor
         EditorGUILayout.BeginVertical(GUI.skin.box);
         EditorGUILayout.LabelField("Name", EditorStyles.boldLabel);
         script.ClassNamePrefix = DrawNameField("Class Name Prefix", "Preview: " + script.ClassNamePrefix + "[FileName]", script.ClassNamePrefix);
-        script.ScriptableScriptSuffix = DrawNameField("Scriptable Script Suffix", "Preview: " + script.ClassNamePrefix + "[FileName]" + script.ScriptableScriptSuffix, script.ScriptableScriptSuffix);
         script.ScriptableAssetSuffix = DrawNameField("Scriptable Asset Suffix", "Preview: " + script.ClassNamePrefix + "[FileName]" + script.ScriptableAssetSuffix, script.ScriptableAssetSuffix);
+        script.ScriptableScriptSuffix = DrawNameField("Scriptable Script Suffix", "Preview: " + script.ClassNamePrefix + "[FileName]" + script.ScriptableScriptSuffix, script.ScriptableScriptSuffix);
         script.ScriptableEditorSuffix = DrawNameField("Scriptable Editor Suffix", "Preview: " + script.ClassNamePrefix + "[FileName]" + script.ScriptableEditorSuffix, script.ScriptableEditorSuffix);
-        EditorGUILayout.EndVertical();
-
-
-        GUILayout.Space(15);
-        EditorGUILayout.BeginVertical(GUI.skin.box);
-        EditorGUILayout.LabelField("Extension", EditorStyles.boldLabel);
-        script.FileExtensionTXT = DrawNormalField("File Extension TXT", script.FileExtensionTXT);
-        script.FileExtensionCS = DrawNormalField("File Extension CS", script.FileExtensionCS);
-        script.FileExtensionASSET = DrawNormalField("File Extension ASSET", script.FileExtensionASSET);
         EditorGUILayout.EndVertical();
 
         EditorUtility.SetDirty(script);
