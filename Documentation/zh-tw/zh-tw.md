@@ -89,7 +89,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 ## 使用方式
 1. 從 Excel 或是 Google Excel 匯出 Tab分隔資料 (.tsv)
 2. 附檔名改為 .txt
-3. 將 .txt 檔案放入 Assets\ClientDataBase\GameTable 中
+3. 將 .txt 檔案放入 Assets/ClientDataBase/GameTable 中
 4. 選擇資源產生方式
 	+ 將 GameTable 下所有 .txt 表格資料產出資源
 	  	Unity Menu -> Assets -> Client DataBase -> Update All
@@ -120,7 +120,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
    
   <img src="https://github.com/k79k06k02k/ClientDataBase/blob/master/Documentation/04_Sample_1.png" height="450">
   
-3. 附檔名改為 .txt，並將 .txt 檔案放入 Assets\ClientDataBase\GameTable 中
+3. 附檔名改為 .txt，並將 .txt 檔案放入 Assets/ClientDataBase/GameTable 中
 
 	<img src="https://github.com/k79k06k02k/ClientDataBase/blob/master/Documentation/05_Sample_2.png">
 
@@ -145,24 +145,56 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	          └── TableClass/
 	              └── TableSample.cs    --- 資料類別
 	  ```
+	<br>
+5. 讀取 ScriptableObject 表格資源方式
+ 	+ A. 直接讀取資源，使用 Key 取得資料
+		```cs
+		using UnityEngine;
 
-5. 讀取 ScriptableObject 資源，使用 Key 取得資料
+		public class LoadTable : MonoBehaviour
+		{
+			void Start()
+			{
+				TableSampleScriptable _TableSampleScriptable = Resources.Load<TableSampleScriptable>("ClientDataBase/TableSampleAsset");
 
-	```cs
-	using UnityEngine;
+				TableSample _TableSample = _TableSampleScriptable.GetData("Sample001");
+				print(_TableSample.knowledge);
+				print(_TableSample.pos[0]);
+			}
+		}
+		```
+	<br>
+
+	+ B. 使用 ClientDataBaseManager.cs (管理類別)
 	
-	public class LoadTable : MonoBehaviour
-	{
-	    void Start()
-	    {
-	        TableSampleScriptable _TableSampleScriptable = Resources.Load<TableSampleScriptable>("ClientDataBase/TableSampleAsset");
-	
-	        TableSample _TableSample = _TableSampleScriptable.GetData("Sample001");
-	        print(_TableSample.knowledge);
-	        print(_TableSample.pos[0]);
-	    }
-	}
-	```
+		```
+		Assets/ClientDataBase/Scripts/ClientDataBaseManager.cs
+		```
+		
+		方便讀取與管理 ScriptableObject表格資源、設定檔
+
+		1.在建構子中註冊
+		```cs
+		Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.GameTableName));
+		```
+		2.任意一處取得資料表與資料列
+		```cs
+		using UnityEngine;
+
+		public class LoadTest : MonoBehaviour
+		{
+			void Start()
+			{
+				TableSampleScriptable _TableSampleScriptable = ClientDataBaseManager.Instance.GetTable<TableSampleScriptable>();
+				TableSample _TableSample = _TableSampleScriptable.GetData("Sample003");
+
+				print(_TableSample.knowledge);
+				print(_TableSample.pos[0]);
+			}
+		}
+		```
+
+
 <br><br>
 
 #[作者網站](http://k79k06k02k.com/blog)<br>
