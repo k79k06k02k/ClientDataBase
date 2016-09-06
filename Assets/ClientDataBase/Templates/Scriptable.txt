@@ -27,7 +27,7 @@ public class $ScriptableName : ScriptableObjectBase
     {        
 		m_TableDict.Clear();
 
-		_ClientDataBaseConfig = ClientDataBaseConfigTool.Instance.m_Config;
+		_ClientDataBaseConfig = ClientDataBaseManager.Instance.m_Config;
         path = _ClientDataBaseConfig.GetGameTablePathName(GameTableName);
 
         TextAsset data = AssetDatabase.LoadAssetAtPath<TextAsset>(path);

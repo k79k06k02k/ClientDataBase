@@ -3,14 +3,6 @@
 // FileName : Utility.cs
 **********************************************************/
 using UnityEngine;
-using System.Text;
-using System.IO;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using System;
-using System.Reflection;
-using System.Security.Cryptography;
 
 public class Utility
 {
@@ -37,6 +29,26 @@ public class Utility
         {
             string[] str = value.Split(',');
             return new Vector3(float.Parse(str[0]), float.Parse(str[1]), float.Parse(str[2]));
+        }
+    }
+
+
+    public struct AssetRelate
+    {
+        /// <summary>
+        /// Resources.Load 並檢查是否null
+        /// </summary>
+        public static T ResourcesLoadCheckNull<T>(string name) where T : UnityEngine.Object
+        {
+            T loadGo = Resources.Load<T>(name);
+
+            if (loadGo == null)
+            {
+                Debug.LogError("Resources.Load [ " + name + " ] is Null !!");
+                return default(T);
+            }
+
+            return loadGo;
         }
     }
 }

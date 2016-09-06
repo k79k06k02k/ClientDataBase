@@ -39,7 +39,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
     /// </summary>
     public bool LoadGameTable(Object obj)
     {
-        _Config = ClientDataBaseConfigTool.Instance.m_Config;
+        _Config = ClientDataBaseManager.Instance.m_Config;
         tableName = obj.name;
 
         string strTemp;
@@ -282,7 +282,7 @@ public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
     /// <returns>是否成功建立</returns>
     public bool CreateScriptableAssets(string scriptableScriptName, string scriptableAssetName)
     {
-        _Config = ClientDataBaseConfigTool.Instance.m_Config;
+        _Config = ClientDataBaseManager.Instance.m_Config;
         MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(_Config.GetScriptableScriptsPath() + scriptableScriptName);
 
         if (script == null || script.GetClass() == null)
