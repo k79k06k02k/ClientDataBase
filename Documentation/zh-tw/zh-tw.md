@@ -171,7 +171,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 		Assets/ClientDataBase/Scripts/ClientDataBaseManager.cs
 		```
 		
-		1.在建構子中註冊
+		1.在 ClientDataBaseManager.cs 建構子中註冊
 		```cs
 		public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
 		{
