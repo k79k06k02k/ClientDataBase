@@ -13,6 +13,7 @@ Assets/ClientDataBase/
         ├── Resources/    --- Scriptable 資源
         ├── Scriptable/   --- Scriptable 程式碼
         └── TableClass/   --- 資料列類別
+    ├── Resources/    --- 設定檔	
     ├── Scripts/      --- 相關程式碼
         ├── Base/         --- 基底類別
         ├── Config/       --- 配置設定
@@ -27,7 +28,7 @@ Assets/ClientDataBase/
 ## 配置檔案
 方便修改資源路徑、類別名稱
 ```
-Assets/ClientDataBase/Client DataBase Config.asset
+Assets/ClientDataBase/Resources/Client DataBase Config.asset
 ```
 <img src="https://github.com/k79k06k02k/ClientDataBase/blob/master/Documentation/02_Client%20DataBase%20Config.PNG" height="450">
 
@@ -104,9 +105,9 @@ Assets/ClientDataBase/Client DataBase Config.asset
 	 
 5. 將會自動產生相應程式碼與 ScriptableObject 資源
 6. 讀取 ScriptableObject 資源後，呼叫以下方法取得每列資料
-```cs
-public Table[FileName] GetData(string id)
-```
+	```cs
+	public Table[FileName] GetData(string id)
+	```
 <br><br><br>
 
 ## 範例實作 (使用Google Excel)
