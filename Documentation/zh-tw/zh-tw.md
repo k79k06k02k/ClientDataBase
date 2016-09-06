@@ -109,7 +109,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	```cs
 	public Table[FileName] GetData(string id)
 	```
-<br><br><br>
+<br><br>
 
 ## 範例實作 (使用Google Excel)
 1. Excel 資料表準備
@@ -151,7 +151,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 		```cs
 		using UnityEngine;
 
-		public class LoadTable : MonoBehaviour
+		public class LoadTableNormal : MonoBehaviour
 		{
 			void Start()
 			{
@@ -181,7 +181,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 		```cs
 		using UnityEngine;
 
-		public class LoadTest : MonoBehaviour
+		public class LoadTableManager : MonoBehaviour
 		{
 			void Start()
 			{
