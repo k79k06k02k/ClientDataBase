@@ -153,14 +153,18 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 
 		public class LoadTableNormal : MonoBehaviour
 		{
-			void Start()
-			{
-				TableSampleScriptable _TableSampleScriptable = Resources.Load<TableSampleScriptable>("ClientDataBase/TableSampleAsset");
-
-				TableSample _TableSample = _TableSampleScriptable.GetData("Sample001");
-				print(_TableSample.knowledge);
-				print(_TableSample.pos[0]);
-			}
+		    const string c_path = "ClientDataBase/TableSampleAsset";
+		    const string c_key = "Sample001";
+		
+		    void Start()
+		    {
+		        TableSampleScriptable tableSampleScriptable = Resources.Load<TableSampleScriptable>(c_path);
+		
+		        TableSample tableSample = tableSampleScriptable.GetData(c_key);
+		
+		        print(string.Format("{0} : {1}", c_key, tableSample.knowledge));
+		        print(string.Format("{0} : {1}", c_key, tableSample.pos[0]));
+		    }
 		}
 		```
 	<br>
@@ -178,7 +182,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 				...
 			 public ClientDataBaseManager()
 			 {
-			 	Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.GameTableName));
+				Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.m_gameTableName));
 			 }
 			 	...
 		}
@@ -189,14 +193,16 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 
 		public class LoadTableManager : MonoBehaviour
 		{
-			void Start()
-			{
-				TableSampleScriptable _TableSampleScriptable = ClientDataBaseManager.Instance.GetTable<TableSampleScriptable>();
-				TableSample _TableSample = _TableSampleScriptable.GetData("Sample003");
-
-				print(_TableSample.knowledge);
-				print(_TableSample.pos[0]);
-			}
+		    const string c_key = "Sample003";
+		
+		    void Start()
+		    {
+		        TableSampleScriptable tableSampleScriptable = ClientDataBaseManager.Instance.GetTable<TableSampleScriptable>();
+		        TableSample tableSample = tableSampleScriptable.GetData(c_key);
+		
+		        print(string.Format("{0} : {1}", c_key, tableSample.knowledge));
+		        print(string.Format("{0} : {1}", c_key, tableSample.pos[0]));
+		    }
 		}
 		```
 
