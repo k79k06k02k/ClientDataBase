@@ -182,7 +182,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 				...
 			 public ClientDataBaseManager()
 			 {
-			 	Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.GameTableName));
+				Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.m_gameTableName));
 			 }
 			 	...
 		}
