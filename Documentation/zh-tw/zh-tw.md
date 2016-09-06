@@ -165,14 +165,12 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 		```
 	<br>
 
-	+ B. 使用 ClientDataBaseManager.cs (管理類別)
+	+ B. 使用 ClientDataBaseManager.cs (管理類別)，方便讀取與管理 ScriptableObject表格資源、設定檔
 	
 		```
 		Assets/ClientDataBase/Scripts/ClientDataBaseManager.cs
 		```
 		
-		方便讀取與管理 ScriptableObject表格資源、設定檔
-
 		1.在建構子中註冊
 		```cs
 		Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.GameTableName));
