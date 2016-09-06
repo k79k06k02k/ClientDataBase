@@ -105,6 +105,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	 
 5. 將會自動產生相應程式碼與 ScriptableObject 資源
 6. 讀取 ScriptableObject 資源後，呼叫以下方法取得每列資料
+
 	```cs
 	public Table[FileName] GetData(string id)
 	```
