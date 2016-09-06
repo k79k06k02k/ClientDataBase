@@ -1,5 +1,5 @@
 # Client DataBase 本地資料讀取系統
-本地資料讀取系統能方便讀取企劃 Excel 表格，將會自動產生相應程式碼與 [ScriptableObject](https://unity3d.com/cn/learn/tutorials/modules/beginner/live-training-archive/scriptable-objects) 資源檔。
+本地資料讀取系統能方便讀取企劃 Excel 表格，將會自動產生相應程式碼與 [ScriptableObject](https://unity3d.com/cn/learn/tutorials/modules/beginner/live-training-archive/scriptable-objects) 表格資源檔。
 
 <img src="https://github.com/k79k06k02k/ClientDataBase/blob/master/Documentation/01_Excel%20to%20ScriptableObject%20Asset.png">
 <br><br><br>
@@ -9,8 +9,8 @@
 ```
 Assets/ClientDataBase/
     ├── GameTable/    --- Excel資料表(txt)
-    ├── Generate/     --- 自動產出之資源與程式碼
-        ├── Resources/    --- Scriptable 資源
+    ├── Generate/     --- 自動產出之表格資源與程式碼
+        ├── Resources/    --- Scriptable 表格資源
         ├── Scriptable/   --- Scriptable 程式碼
         └── TableClass/   --- 資料列類別
     ├── Resources/    --- 設定檔	
@@ -41,12 +41,12 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 || Script Templates Path | 程式碼版型路徑 |
 || Game Table Path | 資料表路徑 |
 || Table Class Path | "自動產出" 資料類別路徑 |
-|| Scriptable Asset Path | "自動產出" Scriptable 資源路徑 |
+|| Scriptable Asset Path | "自動產出" Scriptable 表格資源路徑 |
 || Scriptable Scripts Path | "自動產出" Scriptable 程式碼路徑 |
 || Scriptable Editor Path | "自動產出" Scriptable 編輯程式碼路徑 |
 | Name   | | |
 || Class Name Prefix | "自動產出" 資料類別名稱 |
-|| Scriptable Asset Suffix | "自動產出" Scriptable 資源名稱 |
+|| Scriptable Asset Suffix | "自動產出" Scriptable 表格資源名稱 |
 || Scriptable Script Suffix | "自動產出" Scriptable 程式碼名稱 |
 || Scriptable Editor Suffix | "自動產出" Scriptable 編輯程式碼名稱 |
 <br><br><br>
@@ -103,8 +103,8 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	 
 	 頁籤 Update：選擇一個或多個 資料表 ScriptableObject 資源後，按下 Update 按鈕重新從 .txt 表格 再次更新資料
 	 
-5. 將會自動產生相應程式碼與 ScriptableObject 資源
-6. 讀取 ScriptableObject 資源後，呼叫以下方法取得每列資料
+5. 將會自動產生相應程式碼與 ScriptableObject 表格資源
+6. 讀取 ScriptableObject 表格資源後，呼叫以下方法取得每列資料
 
 	```cs
 	public Table[FileName] GetData(string id)
@@ -134,7 +134,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	      ├── Generate/     
 	          ├── Resources/    
 	              └── ClientDataBase/   
-	                  └── TableSampleAsset.asset    --- Scriptable 資源
+	                  └── TableSampleAsset.asset    --- Scriptable 表格資源
 	  
 	          ├── Scriptable/  
 	              ├── Editor/   
@@ -147,7 +147,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	  ```
 	<br>
 5. 讀取 ScriptableObject 表格資源方式
- 	+ A. 直接讀取資源，使用 Key 取得資料
+ 	+ A. 直接讀取表格資源，使用 Key 取得資料
 		```cs
 		using UnityEngine;
 
@@ -165,7 +165,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 		```
 	<br>
 
-	+ B. 使用 ClientDataBaseManager.cs (管理類別)，方便讀取與管理 ScriptableObject表格資源、設定檔
+	+ B. 使用 ClientDataBaseManager.cs (管理類別)，方便讀取與管理 ScriptableObject 表格資源、設定檔
 	
 		```
 		Assets/ClientDataBase/Scripts/ClientDataBaseManager.cs
