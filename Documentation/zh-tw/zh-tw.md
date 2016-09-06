@@ -173,7 +173,15 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 		
 		1.在建構子中註冊
 		```cs
-		Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.GameTableName));
+		public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
+		{
+				...
+			 public ClientDataBaseManager()
+			 {
+			 	Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.GameTableName));
+			 }
+			 	...
+		}
 		```
 		2.任意一處取得資料表與資料列
 		```cs
