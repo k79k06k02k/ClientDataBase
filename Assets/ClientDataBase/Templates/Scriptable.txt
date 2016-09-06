@@ -15,20 +15,20 @@ public class Dictionary$ClassName : SerializableDictionary<string, $ClassName> {
 
 public class $ScriptableName : ScriptableObjectBase
 {
-    public static string GameTableName = "$GameTableName";
-	public Dictionary$ClassName m_TableDict = new Dictionary$ClassName();
+    public static string m_gameTableName = "$GameTableName";
+	public Dictionary$ClassName m_tableDict = new Dictionary$ClassName();
 
-	ClientDataBaseConfig _ClientDataBaseConfig;
+	ClientDataBaseConfig _clientDataBaseConfig;
 
 #if UNITY_EDITOR
 	string path;
 
 	public override bool LoadGameTable()
     {        
-		m_TableDict.Clear();
+		m_tableDict.Clear();
 
-		_ClientDataBaseConfig = ClientDataBaseManager.Instance.m_Config;
-        path = _ClientDataBaseConfig.GetGameTablePathName(GameTableName);
+		_clientDataBaseConfig = ClientDataBaseManager.Instance.m_config;
+        path = _clientDataBaseConfig.GetGameTablePathName(m_gameTableName);
 
         TextAsset data = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
         StringReader reader = null;
@@ -57,7 +57,7 @@ public class $ScriptableName : ScriptableObjectBase
 
 				$ClassName table = new $ClassName();
 $DataLoad
-                m_TableDict.Add(table.id, table);
+                m_tableDict.Add(table.id, table);
 
                 index++;
             }
@@ -78,9 +78,9 @@ $DataLoad
 
     public $ClassName GetData(string id)
     {
-        if (m_TableDict.ContainsKey(id))
+        if (m_tableDict.ContainsKey(id))
         {
-            return m_TableDict[id];
+            return m_tableDict[id];
         }
         else
         {

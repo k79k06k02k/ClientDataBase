@@ -12,28 +12,28 @@ using System.Text;
 public class ClientDataBaseEditorWindow : EditorWindow
 {
     //按下執行按鈕
-    bool isExecuteButtonClick = false;
-    float waitForExecute = 0.1f;
+    bool _boolExecuteButtonClick = false;
+    float _floatWaitForExecute = 0.1f;
 
     //一次執行的開始
-    bool isStartCreate = false;
+    bool _boolStartCreate = false;
 
     //是否是更新全部
-    bool isUpdateAll = false;
+    bool _boolUpdateAll = false;
 
     //等待 Application Compiling Script
-    bool isNeedToAttach = false;
-    float waitForCompile = 1;
+    bool _boolNeedToAttach = false;
+    float _floatWaitForCompile = 1;
 
-    string[] Types = new string[] { "Create", "Update" };
-    int tabIndex = 0;
+    string[] _types = new string[] { "Create", "Update" };
+    int _intTabIndex = 0;
 
-    List<Object> objList;
-    int nowCount = 0;
-    int totalCount = 0;
+    List<Object> _objList;
+    int _intNowCount = 0;
+    int _inttotalCount = 0;
 
-    Vector2 scrollPos;
-    GUIStyle BtnStyle;
+    Vector2 _scrollPos;
+    GUIStyle _btnStyle;
 
     [MenuItem("Tools/Client DataBase/Window")]
     [MenuItem("Assets/Client DataBase/Window", false, 110)]
@@ -51,59 +51,59 @@ public class ClientDataBaseEditorWindow : EditorWindow
     public static void UpdateAll()
     {
         ClientDataBaseEditorWindow window = EditorWindow.GetWindow<ClientDataBaseEditorWindow>();
-        window.isUpdateAll = true;
-        window.isStartCreate = true;
-        window.objList = UtilityEditor.LoadAllAssetsAtPath(ClientDataBaseManager.Instance.m_Config.GetGameTablePath()).ToList();
-        window.isExecuteButtonClick = true;
+        window._boolUpdateAll = true;
+        window._boolStartCreate = true;
+        window._objList = UtilityEditor.LoadAllAssetsAtPath(ClientDataBaseManager.Instance.m_config.GetGameTablePath()).ToList();
+        window._boolExecuteButtonClick = true;
     }
 
 
     void Update()
     {
         //等待 Application Compiling Script，建立 ScriptableObject Asset
-        if (isNeedToAttach)
+        if (_boolNeedToAttach)
         {
-            waitForCompile -= 0.01f;
+            _floatWaitForCompile -= 0.01f;
 
-            if (waitForCompile <= 0)
+            if (_floatWaitForCompile <= 0)
             {
                 if (!EditorApplication.isCompiling)
                 {
-                    foreach (Object go in objList)
+                    foreach (Object go in _objList)
                     {
                         string path = AssetDatabase.GetAssetPath(go);
                         string fileName = Path.GetFileNameWithoutExtension(path);
-                        string scriptableScriptName = ClientDataBaseManager.Instance.m_Config.GetScriptableScriptName(fileName, true);
-                        string scriptableAssetName = ClientDataBaseManager.Instance.m_Config.GetScriptableAssetName(fileName, true);
+                        string scriptableScriptName = ClientDataBaseManager.Instance.m_config.GetScriptableScriptName(fileName, true);
+                        string scriptableAssetName = ClientDataBaseManager.Instance.m_config.GetScriptableAssetName(fileName, true);
 
-                        nowCount++;
+                        _intNowCount++;
                         UpdateProgressBar("Generate Scriptable Assets", string.Format("[File Name:{0}]", scriptableAssetName));
 
                         if (ClientDataBaseParse.Instance.CreateScriptableAssets(scriptableScriptName, scriptableAssetName) == false)
                             continue;
                     }
 
-                    isStartCreate = false;
-                    isNeedToAttach = false;
-                    waitForCompile = 1;
+                    _boolStartCreate = false;
+                    _boolNeedToAttach = false;
+                    _floatWaitForCompile = 1;
                     EditorUtility.ClearProgressBar();
 
-                    if (isUpdateAll)
+                    if (_boolUpdateAll)
                         this.Close();
                 }
             }
         }
 
         //點下按鈕後，延遲執行，先讓 Loading 畫面出來
-        if (isExecuteButtonClick)
+        if (_boolExecuteButtonClick)
         {
-            waitForExecute -= 0.01f;
-            if (waitForExecute <= 0)
+            _floatWaitForExecute -= 0.01f;
+            if (_floatWaitForExecute <= 0)
             {
                 Execute();
 
-                isExecuteButtonClick = false;
-                waitForExecute = 0.1f;
+                _boolExecuteButtonClick = false;
+                _floatWaitForExecute = 0.1f;
             }
         }
     }
@@ -115,32 +115,32 @@ public class ClientDataBaseEditorWindow : EditorWindow
 
     void OnGUI()
     {
-        BtnStyle = new GUIStyle(GUI.skin.button);
-        BtnStyle.fontSize = 16;
-        BtnStyle.alignment = TextAnchor.MiddleLeft;
+        _btnStyle = new GUIStyle(GUI.skin.button);
+        _btnStyle.fontSize = 16;
+        _btnStyle.alignment = TextAnchor.MiddleLeft;
 
         //遮罩
-        if (isStartCreate)
+        if (_boolStartCreate)
             GUI.enabled = false;
 
 
-        tabIndex = UtilityEditor.Tabs(Types, tabIndex);
+        _intTabIndex = UtilityEditor.Tabs(_types, _intTabIndex);
         GUILayout.Space(10);
 
         //還沒開始時才需要抓物件
-        if (isStartCreate == false && isUpdateAll == false)
-            objList = Selection.objects.ToList();
+        if (_boolStartCreate == false && _boolUpdateAll == false)
+            _objList = Selection.objects.ToList();
 
 
         //排除
-        for (int i = objList.Count - 1; i >= 0; i--)
+        for (int i = _objList.Count - 1; i >= 0; i--)
         {
-            if (GetFiltered(objList[i]))
-                objList.Remove(objList[i]);
+            if (GetFiltered(_objList[i]))
+                _objList.Remove(_objList[i]);
         }
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Choose GameTable Asset", EditorStyles.boldLabel, GUILayout.Width(200));
-        EditorGUILayout.LabelField("Count : " + objList.Count, EditorStyles.boldLabel, GUILayout.Width(100));
+        EditorGUILayout.LabelField("Count : " + _objList.Count, EditorStyles.boldLabel, GUILayout.Width(100));
         if (GUILayout.Button("Update All"))
         {
             UpdateAll();
@@ -148,32 +148,32 @@ public class ClientDataBaseEditorWindow : EditorWindow
         EditorGUILayout.EndHorizontal();
         GUILayout.Space(10);
 
-        if (objList.Count == 0)
+        if (_objList.Count == 0)
         {
             EditorGUILayout.HelpBox(GetHelpString(), MessageType.Warning);
             return;
         }
 
         //字母排序
-        objList.Sort(delegate (Object a, Object b)
+        _objList.Sort(delegate (Object a, Object b)
         {
             return a.name.CompareTo(b.name);
         });
 
         EditorGUILayout.BeginVertical();
-        scrollPos = EditorGUILayout.BeginScrollView(scrollPos, false, false);
+        _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, false, false);
         EditorGUILayout.Space();
 
-        foreach (Object go in objList)
+        foreach (Object go in _objList)
         {
-            if (GUILayout.Button(go.name, BtnStyle))
+            if (GUILayout.Button(go.name, _btnStyle))
                 EditorGUIUtility.PingObject(go);
         }
 
         EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
 
-        if (UtilityEditor.GetCommonButton(Types[tabIndex]))
+        if (UtilityEditor.GetCommonButton(_types[_intTabIndex]))
         {
             if (EditorApplication.isCompiling)
             {
@@ -181,11 +181,11 @@ public class ClientDataBaseEditorWindow : EditorWindow
                 return;
             }
 
-            isStartCreate = true;
-            isExecuteButtonClick = true;
+            _boolStartCreate = true;
+            _boolExecuteButtonClick = true;
         }
 
-        if (isStartCreate)
+        if (_boolStartCreate)
         {
             GUI.enabled = true;
             UtilityEditor.ShowLoading();
@@ -195,7 +195,7 @@ public class ClientDataBaseEditorWindow : EditorWindow
 
     void OnDestroy()
     {
-        if (isNeedToAttach)
+        if (_boolNeedToAttach)
             Debug.LogError("Please wait complete, Or may cause a crash...");
 
         EditorUtility.ClearProgressBar();
@@ -203,7 +203,7 @@ public class ClientDataBaseEditorWindow : EditorWindow
 
     void Execute()
     {
-        switch (tabIndex)
+        switch (_intTabIndex)
         {
             case 0:
                 CreateAsset();
@@ -219,15 +219,15 @@ public class ClientDataBaseEditorWindow : EditorWindow
     {
         //乘2是因為把 Script 與 Scriptable Asset 分開處理，必須先等 Application Compiling 完，才找的到 Scriptable Class，最後才能透過 Class 建立 Scriptable Asset 
         //加1是等 Application Compiling 的區間
-        totalCount = objList.Count * 2 + 1;
+        _inttotalCount = _objList.Count * 2 + 1;
 
-        nowCount = 0;
+        _intNowCount = 0;
 
-        foreach (Object go in objList)
+        foreach (Object go in _objList)
         {
             string path = AssetDatabase.GetAssetPath(go);
 
-            nowCount++;
+            _intNowCount++;
 
             string fileName = Path.GetFileName(path);
 
@@ -237,21 +237,21 @@ public class ClientDataBaseEditorWindow : EditorWindow
                 continue;
         }
 
-        nowCount++;
+        _intNowCount++;
         UpdateProgressBar("Please Wait", "Wait Application Compiling....");
-        isNeedToAttach = true;
+        _boolNeedToAttach = true;
     }
 
     void UpdateAsset()
     {
-        foreach (Object go in objList)
+        foreach (Object go in _objList)
         {
             ScriptableObjectBase script = (ScriptableObjectBase)go;
 
             if (script.LoadGameTable() == false)
                 continue;
         }
-        isStartCreate = false;
+        _boolStartCreate = false;
     }
 
 
@@ -260,13 +260,13 @@ public class ClientDataBaseEditorWindow : EditorWindow
         string path = AssetDatabase.GetAssetPath(obj);
         string extension = Path.GetExtension(path);
 
-        switch (tabIndex)
+        switch (_intTabIndex)
         {
             case 0:
-                return extension != ClientDataBaseManager.Instance.m_Config.FileExtensionTXT || ((TextAsset)obj).ToString().StartsWith(ClientDataBaseManager.Instance.m_Config.GameTableCheck) == false;
+                return extension != ClientDataBaseManager.Instance.m_config.m_extensionTxt || ((TextAsset)obj).ToString().StartsWith(ClientDataBaseManager.Instance.m_config.m_gameTableCheck) == false;
 
             case 1:
-                return extension != ClientDataBaseManager.Instance.m_Config.FileExtensionASSET || obj.name == ClientDataBaseManager.Instance.m_Config.name;
+                return extension != ClientDataBaseManager.Instance.m_config.m_extensionAsset || obj.name == ClientDataBaseManager.Instance.m_config.name;
 
             default:
                 return true;
@@ -280,11 +280,11 @@ public class ClientDataBaseEditorWindow : EditorWindow
         sb.Append("No Source." + "\n\n");
         sb.Append("Please Check Select Asset：" + "\n");
 
-        switch (tabIndex)
+        switch (_intTabIndex)
         {
             case 0:
                 sb.Append("1.Asset in Project" + "\n");
-                sb.Append("2.Asset extension must [" + ClientDataBaseManager.Instance.m_Config.FileExtensionTXT + "]" + "\n");
+                sb.Append("2.Asset extension must [" + ClientDataBaseManager.Instance.m_config.m_extensionTxt + "]" + "\n");
                 sb.Append("3.Asset content must table.");
                 break;
 
@@ -303,7 +303,7 @@ public class ClientDataBaseEditorWindow : EditorWindow
 
     void UpdateProgressBar(string title, string info)
     {
-        float process = nowCount / (float)totalCount;
+        float process = _intNowCount / (float)_inttotalCount;
         EditorUtility.DisplayProgressBar(title, string.Format("[{0}%] {1}", (int)(process * 100), info), process);
     }
 }

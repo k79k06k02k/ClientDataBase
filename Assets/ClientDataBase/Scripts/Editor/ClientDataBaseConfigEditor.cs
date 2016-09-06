@@ -8,42 +8,42 @@ using UnityEditor;
 [CustomEditor(typeof(ClientDataBaseConfig))]
 public class ClientDataBaseConfigEditor : Editor
 {
-    ClientDataBaseConfig script;
+    ClientDataBaseConfig _script;
 
     public override void OnInspectorGUI()
     {
-        script = target as ClientDataBaseConfig;
+        _script = target as ClientDataBaseConfig;
 
         GUILayout.Space(15);
         EditorGUILayout.BeginVertical(GUI.skin.box);
         EditorGUILayout.LabelField("Check", EditorStyles.boldLabel);
-        script.GameTableCheck = DrawNormalField("Game Table Check", script.GameTableCheck);
+        _script.m_gameTableCheck = DrawNormalField("Game Table Check", _script.m_gameTableCheck);
         EditorGUILayout.EndVertical();
 
 
         GUILayout.Space(15);
         EditorGUILayout.BeginVertical(GUI.skin.box);
         EditorGUILayout.LabelField("Path", EditorStyles.boldLabel);
-        script.ROOT = DrawNormalField("ROOT", script.ROOT);
-        script.ScriptTemplatesPath = DrawPathField("Script Templates Path", script.ScriptTemplatesPath);
-        script.GameTablePath = DrawPathField("Game Table Path", script.GameTablePath);
-        script.TableClassPath = DrawPathField("Table Class Path", script.TableClassPath);
-        script.ScriptableAssetPath = DrawPathField("Scriptable Asset Path", script.ScriptableAssetPath);
-        script.ScriptableScriptsPath = DrawPathField("Scriptable Scripts Path", script.ScriptableScriptsPath);
-        script.ScriptableEditorPath = DrawPathField("Scriptable Editor Path", script.ScriptableEditorPath);
+        _script.m_root = DrawNormalField("ROOT", _script.m_root);
+        _script.m_pathScriptTemplates = DrawPathField("Script Templates Path", _script.m_pathScriptTemplates);
+        _script.m_pathGameTable = DrawPathField("Game Table Path", _script.m_pathGameTable);
+        _script.m_pathTableClass = DrawPathField("Table Class Path", _script.m_pathTableClass);
+        _script.m_pathScriptableAsset = DrawPathField("Scriptable Asset Path", _script.m_pathScriptableAsset);
+        _script.m_pathScriptableScripts = DrawPathField("Scriptable Scripts Path", _script.m_pathScriptableScripts);
+        _script.m_pathScriptableEditor = DrawPathField("Scriptable Editor Path", _script.m_pathScriptableEditor);
         EditorGUILayout.EndVertical();
 
 
         GUILayout.Space(15);
         EditorGUILayout.BeginVertical(GUI.skin.box);
         EditorGUILayout.LabelField("Name", EditorStyles.boldLabel);
-        script.ClassNamePrefix = DrawNameField("Class Name Prefix", "Preview: " + script.ClassNamePrefix + "[FileName]", script.ClassNamePrefix);
-        script.ScriptableAssetSuffix = DrawNameField("Scriptable Asset Suffix", "Preview: " + script.ClassNamePrefix + "[FileName]" + script.ScriptableAssetSuffix, script.ScriptableAssetSuffix);
-        script.ScriptableScriptSuffix = DrawNameField("Scriptable Script Suffix", "Preview: " + script.ClassNamePrefix + "[FileName]" + script.ScriptableScriptSuffix, script.ScriptableScriptSuffix);
-        script.ScriptableEditorSuffix = DrawNameField("Scriptable Editor Suffix", "Preview: " + script.ClassNamePrefix + "[FileName]" + script.ScriptableEditorSuffix, script.ScriptableEditorSuffix);
+        _script.m_nameClassPrefix = DrawNameField("Class Name Prefix", "Preview: " + _script.m_nameClassPrefix + "[FileName]", _script.m_nameClassPrefix);
+        _script.m_nameScriptableAssetSuffix = DrawNameField("Scriptable Asset Suffix", "Preview: " + _script.m_nameClassPrefix + "[FileName]" + _script.m_nameScriptableAssetSuffix, _script.m_nameScriptableAssetSuffix);
+        _script.m_nameScriptableScriptSuffix = DrawNameField("Scriptable Script Suffix", "Preview: " + _script.m_nameClassPrefix + "[FileName]" + _script.m_nameScriptableScriptSuffix, _script.m_nameScriptableScriptSuffix);
+        _script.m_nameScriptableEditorSuffix = DrawNameField("Scriptable Editor Suffix", "Preview: " + _script.m_nameClassPrefix + "[FileName]" + _script.m_nameScriptableEditorSuffix, _script.m_nameScriptableEditorSuffix);
         EditorGUILayout.EndVertical();
 
-        EditorUtility.SetDirty(script);
+        EditorUtility.SetDirty(_script);
     }
 
     string DrawNormalField(string name, string field)

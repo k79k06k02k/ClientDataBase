@@ -8,7 +8,7 @@ public class Utility
 {
     public struct TypeRelate
     {
-		public static bool StringToBool(string value)
+        public static bool StringToBool(string value)
         {
             if (value == "T")
                 return true;

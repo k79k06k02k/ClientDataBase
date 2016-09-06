@@ -2,144 +2,142 @@
 // Author   : K.(k79k06k02k)
 // FileName : ClientDataBaseConfig.cs
 **********************************************************/
-using UnityEngine;
-
-public class ClientDataBaseConfig : ScriptableObject
+public class ClientDataBaseConfig : UnityEngine.ScriptableObject
 {
     /// <summary>
     /// GameTable 識別字串，判斷方式是與資料一開始的字串做比對
     /// </summary>
-    public string GameTableCheck = "##";
+    public string m_gameTableCheck = "##";
 
 
-    public string ROOT = "Assets/ClientDataBase/";
+    public string m_root = "Assets/ClientDataBase/";
 
     /// <summary>
     /// Script Templates 存放路徑
     /// </summary>
-    public string ScriptTemplatesPath = "Templates/";
+    public string m_pathScriptTemplates = "Templates/";
 
     /// <summary>
     /// 資料表(txt) 存放路徑
     /// </summary>
-    public string GameTablePath = "GameTable/";
+    public string m_pathGameTable = "GameTable/";
 
     /// <summary>
     /// 資料類別 存放路徑
     /// </summary>
-    public string TableClassPath = "Generate/TableClass/";
+    public string m_pathTableClass = "Generate/TableClass/";
 
     /// <summary>
     /// Scriptable Asset 存放路徑
     /// </summary>
-    public string ScriptableAssetPath = "Generate/Resources/ClientDataBase/";
+    public string m_pathScriptableAsset = "Generate/Resources/ClientDataBase/";
 
     /// <summary>
     /// Scriptable Script 存放路徑
     /// </summary>
-    public string ScriptableScriptsPath = "Generate/Scriptable/Script/";
+    public string m_pathScriptableScripts = "Generate/Scriptable/Script/";
 
     /// <summary>
     /// Scriptable Editor Script 存放路徑
     /// </summary>
-    public string ScriptableEditorPath = "Generate/Scriptable/Editor/";
+    public string m_pathScriptableEditor = "Generate/Scriptable/Editor/";
 
 
     /// <summary>
     /// 類別名稱 前綴
     /// EX: Table[FileName]
     /// </summary>
-    public string ClassNamePrefix = "Table";
+    public string m_nameClassPrefix = "Table";
 
     /// <summary>
     /// Scriptable Asset 後綴
     /// EX: Table[FileName]Asset
     /// </summary>
-    public string ScriptableAssetSuffix = "Asset";
+    public string m_nameScriptableAssetSuffix = "Asset";
 
     /// <summary>
     /// Scriptable Script 後綴
     /// EX: Table[FileName]Scriptable
     /// </summary>
-    public string ScriptableScriptSuffix = "Scriptable";
+    public string m_nameScriptableScriptSuffix = "Scriptable";
     
     /// <summary>
     /// Scriptable Editor 後綴
     /// EX: Table[FileName]ScriptableEditor
     /// </summary>
-    public string ScriptableEditorSuffix = "ScriptableEditor";
+    public string m_nameScriptableEditorSuffix = "ScriptableEditor";
 
 
     /// <summary>
     /// 附檔名 .cs
     /// </summary>
-    public string FileExtensionTXT = ".txt";
+    public string m_extensionTxt = ".txt";
 
     /// <summary>
     /// 附檔名 .cs
     /// </summary>
-    public string FileExtensionCS = ".cs";
+    public string m_extensionCs = ".cs";
 
     /// <summary>
     /// 附檔名 .asset
     /// </summary>
-    public string FileExtensionASSET = ".asset";
+    public string m_extensionAsset = ".asset";
 
 
     public string GetTemplatePathName(string name)
     {
-        return ROOT + ScriptTemplatesPath + name + FileExtensionTXT;
+        return m_root + m_pathScriptTemplates + name + m_extensionTxt;
     }
 
     public string GetGameTablePathName(string name)
     {
-        return ROOT + GameTablePath + name + FileExtensionTXT;
+        return m_root + m_pathGameTable + name + m_extensionTxt;
     }
 
     public string GetGameTablePath()
     {
-        return ROOT + GameTablePath;
+        return m_root + m_pathGameTable;
     }
 
     public string GetTableClassPath()
     {
-        return ROOT + TableClassPath;
+        return m_root + m_pathTableClass;
     }
 
     public string GetScriptableAssetPath()
     {
-        return ROOT + ScriptableAssetPath;
+        return m_root + m_pathScriptableAsset;
     }
 
     public string GetScriptableScriptsPath()
     {
-        return ROOT + ScriptableScriptsPath;
+        return m_root + m_pathScriptableScripts;
     }
 
     public string GetScriptableEditorPath()
     {
-        return ROOT + ScriptableEditorPath;
+        return m_root + m_pathScriptableEditor;
     }
 
 
 
-    public string GetTableClassScriptName(string fileName, bool isExtension = false)
+    public string GetTableClassScriptName(string fileName, bool boolExtension = false)
     {
-        return ClassNamePrefix + fileName + (isExtension ? FileExtensionCS : "");
+        return m_nameClassPrefix + fileName + (boolExtension ? m_extensionCs : "");
     }
 
-    public string GetScriptableScriptName(string fileName, bool isExtension = false)
+    public string GetScriptableScriptName(string fileName, bool boolExtension = false)
     {
-        return ClassNamePrefix + fileName + ScriptableScriptSuffix + (isExtension ? FileExtensionCS : "");
+        return m_nameClassPrefix + fileName + m_nameScriptableScriptSuffix + (boolExtension ? m_extensionCs : "");
     }
 
-    public string GetScriptableScriptEditorName(string fileName, bool isExtension = false)
+    public string GetScriptableScriptEditorName(string fileName, bool boolExtension = false)
     {
-        return ClassNamePrefix + fileName + ScriptableEditorSuffix + (isExtension ? FileExtensionCS : "");
+        return m_nameClassPrefix + fileName + m_nameScriptableEditorSuffix + (boolExtension ? m_extensionCs : "");
     }
 
-    public string GetScriptableAssetName(string fileName, bool isExtension = false)
+    public string GetScriptableAssetName(string fileName, bool boolExtension = false)
     {
-        return ClassNamePrefix + fileName + ScriptableAssetSuffix + (isExtension ? FileExtensionASSET : "");
+        return m_nameClassPrefix + fileName + m_nameScriptableAssetSuffix + (boolExtension ? m_extensionAsset : "");
     }
 }

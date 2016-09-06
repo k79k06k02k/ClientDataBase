@@ -7,41 +7,43 @@ using System;
 
 public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
 {
-    ClientDataBaseConfig _Config;
-    public ClientDataBaseConfig m_Config
+    const string c_pathConfig = "Client DataBase Config";
+    const string c_pathScriptableAssetRoot = "ClientDataBase/";
+
+    ClientDataBaseConfig _config;
+    public ClientDataBaseConfig m_config
     {
         get
         {
-            if (_Config == null)
-                _Config = Utility.AssetRelate.ResourcesLoadCheckNull<ClientDataBaseConfig>("Client DataBase Config");
+            if (_config == null)
+                _config = Utility.AssetRelate.ResourcesLoadCheckNull<ClientDataBaseConfig>(c_pathConfig);
 
-            return _Config;
+            return _config;
         }
     }
 
 
-    public Dictionary<Type, ScriptableObjectBase> m_TableList = new Dictionary<Type, ScriptableObjectBase>();
+    public Dictionary<Type, ScriptableObjectBase> m_tableList = new Dictionary<Type, ScriptableObjectBase>();
 
     public ClientDataBaseManager()
     {
-        //Register(typeof(TableSampleScriptable), LoadTable(TableSampleScriptable.GameTableName));
     }
 
     ScriptableObjectBase LoadTable(string fileName)
     {
-        return Utility.AssetRelate.ResourcesLoadCheckNull<ScriptableObjectBase>("ClientDataBase/" + m_Config.GetScriptableAssetName(fileName));
+        return Utility.AssetRelate.ResourcesLoadCheckNull<ScriptableObjectBase>(c_pathScriptableAssetRoot + m_config.GetScriptableAssetName(fileName));
     }
 
     void Register(Type type, ScriptableObjectBase dataBase)
     {
-        m_TableList.Add(type, dataBase);
+        m_tableList.Add(type, dataBase);
     }
 
     public T GetTable<T>() where T : ScriptableObjectBase, new()
     {
-        if (m_TableList.ContainsKey(typeof(T)))
+        if (m_tableList.ContainsKey(typeof(T)))
         {
-            return (T)m_TableList[typeof(T)];
+            return (T)m_tableList[typeof(T)];
         }
 
         return default(T);
