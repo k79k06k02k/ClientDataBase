@@ -81,8 +81,8 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 + 表格 "第二列" 為變數名稱 (Variable name)
 + 表格 "第三列" 為資料型態 (Data type)
 + 表格 "第一行" id 為讀取資料每列的 Key
-+ bool類型：T為true，F為false
-+ Vector2、Vector3類型：用逗號分隔
++ bool 類型：T為true，F為false
++ Vector2、Vector3 類型：用逗號分隔
 + 陣列表示方法：第二列變數名稱後面加入[]，相同名稱為同個陣列數值
 <br><br><br>
 
