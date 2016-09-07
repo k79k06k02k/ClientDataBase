@@ -83,7 +83,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 + 表格 "第一行" id 為讀取資料每列的 Key
 + bool 類型：T為true，F為false
 + Vector2、Vector3 類型：用逗號分隔
-+ 陣列表示方法：第二列變數名稱後面加入[]，相同名稱為同個陣列數值
++ 陣列表示方法：第二列變數名稱後面加入 "[]"，相同名稱為同個陣列數值
 <br><br><br>
 
 ## 使用方式
