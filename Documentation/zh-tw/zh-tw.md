@@ -8,10 +8,10 @@
 ## 資料夾結構
 ```
 Assets/ClientDataBase/
-    ├── GameTable/    --- Excel資料表(txt)
+    ├── GameTable/    --- Excel 匯出 tab 分隔資料表(txt)
     ├── Generate/     --- 自動產出之表格資源與程式碼
-        ├── Resources/    --- Scriptable 表格資源
-        ├── Scriptable/   --- Scriptable 程式碼
+        ├── Resources/    --- Scriptable Object 表格資源
+        ├── Scriptable/   --- Scriptable Object 程式碼
         └── TableClass/   --- 資料列類別
     ├── Resources/    --- 設定檔	
     ├── Scripts/      --- 相關程式碼
@@ -22,7 +22,7 @@ Assets/ClientDataBase/
     └── Templates/    --- 程式碼版型
 ```
 
-:warning: Generate資料夾 是由工具自動產生
+:warning: Generate 資料夾是由工具自動產生
 <br><br><br>
 
 ## 配置檔案
@@ -41,14 +41,14 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 || Script Templates Path | 程式碼版型路徑 |
 || Game Table Path | 資料表路徑 |
 || Table Class Path | "自動產出" 資料類別路徑 |
-|| Scriptable Asset Path | "自動產出" Scriptable 表格資源路徑 |
-|| Scriptable Scripts Path | "自動產出" Scriptable 程式碼路徑 |
-|| Scriptable Editor Path | "自動產出" Scriptable 編輯程式碼路徑 |
+|| Scriptable Asset Path | "自動產出" Scriptable Object Asset 路徑 |
+|| Scriptable Scripts Path | "自動產出" Scriptable Object Script 路徑 |
+|| Scriptable Editor Path | "自動產出" Scriptable Object Editor Script 路徑 |
 | Name   | | |
 || Class Name Prefix | "自動產出" 資料類別名稱 |
-|| Scriptable Asset Suffix | "自動產出" Scriptable 表格資源名稱 |
-|| Scriptable Script Suffix | "自動產出" Scriptable 程式碼名稱 |
-|| Scriptable Editor Suffix | "自動產出" Scriptable 編輯程式碼名稱 |
+|| Scriptable Asset Suffix | "自動產出" Scriptable Object Asset 名稱 |
+|| Scriptable Script Suffix | "自動產出" Scriptable Object Script 名稱 |
+|| Scriptable Editor Suffix | "自動產出" Scriptable Object Editor Script 名稱 |
 <br><br><br>
 
 ## 支援資料型態
@@ -103,8 +103,8 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	 
 	 頁籤 Update：選擇一個或多個 資料表 ScriptableObject 資源後，按下 Update 按鈕重新從 .txt 表格 再次更新資料
 	 
-5. 將會自動產生相應程式碼與 ScriptableObject 表格資源
-6. 讀取 ScriptableObject 表格資源後，呼叫以下方法取得每列資料
+5. 將會自動產生相應程式碼與 Scriptable Object Asset
+6. 讀取 Scriptable Object Asset 後，呼叫以下方法取得每列資料
 
 	```cs
 	public Table[FileName] GetData(string id)
@@ -146,7 +146,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	              └── TableSample.cs    --- 資料類別
 	  ```
 	<br>
-5. 讀取 ScriptableObject 表格資源方式
+5. 讀取 Scriptable Object Asset 方式
  	+ A. 直接讀取表格資源，使用 Key 取得資料
 		```cs
 		using UnityEngine;
