@@ -91,11 +91,11 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 2. 附檔名改為 .txt
 3. 將 .txt 檔案放入 Assets/ClientDataBase/GameTable 中
 4. 選擇資源產生方式
-	+ 將 GameTable 下所有 .txt 表格資料產出資源
-	  	Unity Menu -> Assets -> Client DataBase -> Update All
+	+ 將 GameTable 下所有 .txt 表格資料產出資源<br>
+	  Unity Menu -> Assets -> Client DataBase -> Update All
 		
-	+ 使用 視窗工具 選擇檔案後，建立或是更新資源
-	  	Unity Menu -> Assets -> Client DataBase -> Window
+	+ 使用 視窗工具 選擇檔案後，建立或是更新資源<br>
+	  Unity Menu -> Assets -> Client DataBase -> Window
 		
       <img src="https://github.com/k79k06k02k/ClientDataBase/blob/master/Documentation/03_Client%20DataBase%20Window.PNG" height="350">
 	 
