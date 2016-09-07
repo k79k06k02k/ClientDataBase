@@ -128,7 +128,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 
 	Unity Menu -> Assets -> Client DataBase -> Update All
 	
-	處理完成後會產生Generate資料夾，檔案結構如下
+	處理完成後會產生 Generate 資料夾，檔案結構如下
 	  ```
 	  Assets/ClientDataBase/
 	      ├── Generate/     
