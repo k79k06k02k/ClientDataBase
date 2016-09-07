@@ -77,9 +77,9 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 
 <br>
 :warning: 幾個要注意的地方
-+ 表格 "第一列" 為中文名稱
-+ 表格 "第二列" 為變數名稱
-+ 表格 "第三列" 為資料型態
++ 表格 "第一列" 為變數描述(Summary)
++ 表格 "第二列" 為變數名稱(Variable name)
++ 表格 "第三列" 為資料型態(Data type)
 + 表格 "第一行" id 為讀取資料每列的 Key
 + bool類型：T為true，F為false
 + Vector2、Vector3類型：用逗號分隔
