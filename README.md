@@ -7,7 +7,7 @@
 + [Engilsh](https://github.com/k79k06k02k/ClientDataBase/blob/master/Documentation/en/en.md)
 <br><br>
 
-#支援 & 問題回報
+##支援 & 問題回報
 作者網站：[http://k79k06k02k.com/blog](http://k79k06k02k.com/blog)<br>
 Email：k79k06k02k@gmail.com<br><br>
 
