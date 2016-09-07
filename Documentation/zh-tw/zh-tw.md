@@ -35,7 +35,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 | 分類 | 名稱 | 描述 |
 | ------ | ----------- | ----------- |
 | Check   ||
-|| Game Table Check   |  檢查是否是 .txt 資料表，判斷開頭字串是否相符 |
+|| Game Table Check   |  檢查資料表格式，判斷開頭字串是否相符 |
 | Path   | | |
 || ROOT | 根目錄 |
 || Script Templates Path | 程式碼版型路徑 |
