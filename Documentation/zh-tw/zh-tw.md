@@ -101,7 +101,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	 
 	 頁籤 Create：選擇一個或多個 .txt 表格資料後，按下 Create 按鈕建立資源
 	 
-	 頁籤 Update：選擇一個或多個 資料表 ScriptableObject 資源後，按下 Update 按鈕重新從 .txt 表格 再次更新資料
+	 頁籤 Update：選擇一個或多個 資料表 Scriptable Object Asset 後，按下 Update 按鈕重新從 .txt 表格 再次更新資料
 	 
 5. 將會自動產生相應程式碼與 Scriptable Object Asset
 6. 讀取 Scriptable Object Asset 後，呼叫以下方法取得每列資料
