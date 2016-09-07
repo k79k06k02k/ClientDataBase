@@ -134,20 +134,20 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	      ├── Generate/     
 	          ├── Resources/    
 	              └── ClientDataBase/   
-	                  └── TableSampleAsset.asset    --- Scriptable 表格資源
+	                  └── TableSampleAsset.asset    --- Scriptable Object Asset
 	  
 	          ├── Scriptable/  
 	              ├── Editor/   
-	                  └── TableSampleScriptableEditor.cs    --- Scriptable 編輯程式碼
+	                  └── TableSampleScriptableEditor.cs    --- Scriptable Object Editor Script
 	              └── Script/   
-	                  └── TableSampleScriptable.cs    --- Scriptable 程式碼
+	                  └── TableSampleScriptable.cs    --- Scriptable Object Script
 	  
 	          └── TableClass/
 	              └── TableSample.cs    --- 資料類別
 	  ```
 	<br>
 5. 讀取 Scriptable Object Asset 方式
- 	+ A. 直接讀取表格資源，使用 Key 取得資料
+ 	+ A. 直接讀取 Scriptable Object Asset，使用 Key 取得資料
 		```cs
 		using UnityEngine;
 
@@ -169,7 +169,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 		```
 	<br>
 
-	+ B. 使用 ClientDataBaseManager.cs (管理類別)，方便讀取與管理 ScriptableObject 表格資源、設定檔
+	+ B. 使用 ClientDataBaseManager.cs (管理類別)，方便讀取與管理 Scriptable Object Asset、設定檔
 	
 		```
 		Assets/ClientDataBase/Scripts/ClientDataBaseManager.cs
