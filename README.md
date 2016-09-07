@@ -1,4 +1,4 @@
-# Client DataBase 本地資料讀取系統 V0.0.1b
+# Client DataBase 本地資料庫系統 V0.0.1b
 <p align="center"><img src="https://github.com/k79k06k02k/ClientDataBase/blob/master/Documentation/01_Excel%20to%20ScriptableObject%20Asset.png"></p>
 <br>
 
