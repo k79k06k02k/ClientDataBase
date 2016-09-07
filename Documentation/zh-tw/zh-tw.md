@@ -1,5 +1,5 @@
 # Client DataBase 本地資料讀取系統 V0.0.1b
-方便讀取企劃 Excel 表格，將會自動產生相應程式碼與 [ScriptableObject](https://unity3d.com/cn/learn/tutorials/modules/beginner/live-training-archive/scriptable-objects) 表格資源檔。
+方便讀取企劃 Excel 表格，將會自動產生相應程式碼與 [Scriptable Object ](https://unity3d.com/cn/learn/tutorials/modules/beginner/live-training-archive/scriptable-objects) Asset。
 
 <p align="center"><img src="https://github.com/k79k06k02k/ClientDataBase/blob/master/Documentation/01_Excel%20to%20ScriptableObject%20Asset.png"></p>
 <br><br>
