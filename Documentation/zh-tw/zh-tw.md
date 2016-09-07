@@ -209,8 +209,9 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 
 <br><br>
 
-#支援 & 問題回報
+##支援 & 問題回報
 作者網站：[http://k79k06k02k.com/blog](http://k79k06k02k.com/blog)<br>
+Facebook：[https://www.facebook.com/k79k06k02k](https://www.facebook.com/k79k06k02k)<br>
 Email：k79k06k02k@gmail.com<br><br>
 
 [![CC-by-sa.png](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)<br>
