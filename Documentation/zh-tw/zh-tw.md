@@ -26,7 +26,7 @@ Assets/ClientDataBase/
 <br><br><br>
 
 ## 配置檔案
-方便修改資源路徑、類別名稱
+方便修改資源路徑、Script 名稱
 ```
 Assets/ClientDataBase/Resources/Client DataBase Config.asset
 ```
