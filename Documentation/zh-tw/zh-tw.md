@@ -40,12 +40,12 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 || ROOT | 根目錄 |
 || Script Templates Path | 程式碼版型路徑 |
 || Game Table Path | 資料表路徑 |
-|| Table Class Path | "自動產出" 資料類別路徑 |
+|| Table Class Path | "自動產出" 資料列類別路徑 |
 || Scriptable Asset Path | "自動產出" Scriptable Object Asset 路徑 |
 || Scriptable Scripts Path | "自動產出" Scriptable Object Script 路徑 |
 || Scriptable Editor Path | "自動產出" Scriptable Object Editor Script 路徑 |
 | Name   | | |
-|| Class Name Prefix | "自動產出" 資料類別名稱 |
+|| Class Name Prefix | "自動產出" 資料列類別名稱 |
 || Scriptable Asset Suffix | "自動產出" Scriptable Object Asset 名稱 |
 || Scriptable Script Suffix | "自動產出" Scriptable Object Script 名稱 |
 || Scriptable Editor Suffix | "自動產出" Scriptable Object Editor Script 名稱 |
@@ -143,7 +143,7 @@ Assets/ClientDataBase/Resources/Client DataBase Config.asset
 	                  └── TableSampleScriptable.cs    --- Scriptable Object Script
 	  
 	          └── TableClass/
-	              └── TableSample.cs    --- 資料類別
+	              └── TableSample.cs    --- 資料列類別
 	  ```
 	<br>
 5. 讀取 Scriptable Object Asset 方式
