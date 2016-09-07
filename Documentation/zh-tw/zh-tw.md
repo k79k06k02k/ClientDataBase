@@ -9,7 +9,7 @@
 ```
 Assets/ClientDataBase/
     ├── GameTable/    --- Excel 匯出 tab 分隔資料表(txt)
-    ├── Generate/     --- 自動產出之表格資源與程式碼
+    ├── Generate/     --- 自動產出之相關資源
         ├── Resources/    --- Scriptable Object 表格資源
         ├── Scriptable/   --- Scriptable Object 程式碼
         └── TableClass/   --- 資料列類別
