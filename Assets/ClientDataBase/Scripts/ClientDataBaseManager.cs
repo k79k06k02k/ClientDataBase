@@ -4,6 +4,7 @@
 **********************************************************/
 using System.Collections.Generic;
 using System;
+using ClientDataBase;
 
 public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
 {
@@ -49,3 +50,4 @@ public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
         return default(T);
     }
 }
+

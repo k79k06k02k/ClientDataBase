@@ -3,6 +3,7 @@
 /*****************************************************************************/
 using System;
 using UnityEngine;
+using ClientDataBase;
 
 #if UNITY_EDITOR
 using System.IO;

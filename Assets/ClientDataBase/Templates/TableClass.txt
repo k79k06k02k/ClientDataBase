@@ -3,6 +3,7 @@
 /*****************************************************************************/
 using UnityEngine;
 using System.Collections;
+using ClientDataBase;
  
 [System.Serializable]
 public class $ClassName : TableClassBase
