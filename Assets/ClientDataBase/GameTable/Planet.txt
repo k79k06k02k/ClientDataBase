@@ -1,0 +1,6 @@
+##輸出	索引	名稱	圖集名稱	圖片名稱	說明	探索地圖	地盤數量	備註
+ouput	id	name	atlasName[]	atlasName[]	Introduction	advMap	landAmount	note
+int	int	int	string	string	int	int	int	-1
+1	1	1	PlanetAtlas_001	Planet_001	2	1	10	1號星球，擁有怪物1、怪物2、怪物3、稀有怪物1
+1	2	3	PlanetAtlas_001	Planet_002	4	2	10	2號星球，擁有怪物4、怪物5、怪物6、稀有怪物2
+1	3	5	PlanetAtlas_001	Planet_003	6	3	8	3號星球，擁有怪物7、怪物8、怪物9、稀有怪物3
