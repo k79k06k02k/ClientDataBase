@@ -3,11 +3,13 @@
 // FileName : ClientDataBaseParse.cs
 **********************************************************/
 using UnityEngine;
+using UnityEditor;
+using Object = UnityEngine.Object;
 using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UnityEditor;
 using System.Text;
+using System;
 
 namespace ClientDataBase
 {
@@ -220,7 +222,16 @@ namespace ClientDataBase
                     string newStr = element + ", " + GetTypeDataClass(i, type[i]);
 
                     variableMap.Remove(fieldName);
-                    variableMap.Add(fieldName, oldStr.Replace(element, newStr));
+
+                    try 
+                    {
+                        variableMap.Add(fieldName, oldStr.Replace(element, newStr));
+                    }
+                    catch (ArgumentException e)
+                    {
+                        Debug.LogError (string.Format ("Duplicate variable name and is not Array, table:[{0}], variable name:[{1}].", _tableName, fieldName));
+                        return false;
+                    }
                 }
                 else
                 {
