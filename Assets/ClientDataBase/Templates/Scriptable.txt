@@ -11,7 +11,7 @@ using UnityEditor;
 #endif
 
 [Serializable]
-public class Dictionary$ClassName : SerializableDictionary<string, $ClassName> { }
+public class Dictionary$ClassName : SerializableDictionary<int, $ClassName> { }
 
 
 public class $ScriptableName : ScriptableObjectBase
@@ -56,6 +56,11 @@ public class $ScriptableName : ScriptableObjectBase
 			        
                 string[] splitStr = strTemp.Split("\t"[0]);
 
+				if ((int)Convert.ChangeType(splitStr[0], typeof(int)) == 0)
+                {
+                    continue;
+                }
+
 				$ClassName table = new $ClassName();
 $DataLoad
                 m_tableDict.Add(table.id, table);
@@ -77,7 +82,7 @@ $DataLoad
     public override bool LoadGameTable() { return false; }
 #endif
 
-    public $ClassName GetData(string id)
+    public $ClassName GetData(int id)
     {
         if (m_tableDict.ContainsKey(id))
         {

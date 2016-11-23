@@ -146,7 +146,7 @@ namespace ClientDataBase
 
             StringBuilder field = new StringBuilder();
 
-            for (int i = 0; i < variable.Length; i++)
+            for (int i = 1; i < variable.Length - 1; i++)
             {
                 //透過字元 '[' ']' 判斷是否是Array 
                 bool isArray = variable[i].EndsWith("[]");
@@ -199,7 +199,7 @@ namespace ClientDataBase
 
             Dictionary<string, string> variableMap = new Dictionary<string, string>();
 
-            for (int i = 0; i < variable.Length; i++)
+            for (int i = 1; i < variable.Length - 1; i++)
             {
                 string resultStr = string.Empty;
 
