@@ -316,9 +316,8 @@ namespace ClientDataBase
 
             //資料讀取
             ScriptableObjectBase scriptableObjectBase = AssetDatabase.LoadAssetAtPath<ScriptableObjectBase>(path);
-            scriptableObjectBase.LoadGameTable();
-
-            return true;
+            
+            return scriptableObjectBase.LoadGameTable();
         }
 
         /// <summary>
@@ -358,9 +357,9 @@ namespace ClientDataBase
         string GetDataClassDetial(int index, string name, string type, bool isArray)
         {
             if (isArray)
-                return string.Format("\t\t\t\ttable.{0} = new {1}[] {{ {2} }};\n", name, type, GetTypeDataClass(index, type));
+                return string.Format("\t\t\t\t\ttable.{0} = new {1}[] {{ {2} }};\n", name, type, GetTypeDataClass(index, type));
             else
-                return string.Format("\t\t\t\ttable.{0} = {1};\n", name, GetTypeDataClass(index, type));
+                return string.Format("\t\t\t\t\ttable.{0} = {1};\n", name, GetTypeDataClass(index, type));
         }
 
 
