@@ -62,7 +62,27 @@ public class $ScriptableName : ScriptableObjectBase
                 }
 
 				$ClassName table = new $ClassName();
+				try
+                {
 $DataLoad
+				}
+                catch (FormatException e)
+                {
+                    string obvious = string.Empty;
+                    string[] log = e.StackTrace.Split('\n');
+                    for (int i = 0; i < log.Length; i++)
+                    {
+                        if (log[i].IndexOf(this.GetType().Name) > 0)
+                        {
+                            obvious = log[i];
+                            break;
+                        }
+                    }
+
+                    Debug.LogError(string.Format("{0} \n<b>{1}</b> \n\nStackTrace:{2}", e.Message, obvious, e.StackTrace));
+                    return false;
+                }
+
                 m_tableDict.Add(table.id, table);
 
                 index++;
