@@ -37,7 +37,6 @@ namespace ClientDataBase
         Vector2 _scrollPos;
         GUIStyle _btnStyle;
 
-        [MenuItem("Tools/Client DataBase/Window")]
         [MenuItem("Assets/Client DataBase/Window", false, 110)]
         public static void ShowWindow()
         {
@@ -48,8 +47,7 @@ namespace ClientDataBase
             editorWindow.titleContent = new GUIContent("Client DataBase Tool");
         }
 
-        [MenuItem("Tools/Client DataBase/Update All")]
-        [MenuItem("Assets/Client DataBase/Update All", false, 110)]
+        [MenuItem("Assets/Client DataBase/Update All", false, 120)]
         public static void UpdateAll()
         {
             ClientDataBaseEditorWindow window = EditorWindow.GetWindow<ClientDataBaseEditorWindow>();
@@ -67,6 +65,16 @@ namespace ClientDataBase
             window._boolExecuteButtonClick = true;
         }
 
+        [MenuItem("Assets/Client DataBase/Init Authenticate From Google", false, 130)]
+        public static void InitAuthenticate()
+        {
+            ClientDataBaseDownload.Instance.InitAuthenticate();
+        }
+        [MenuItem("Assets/Client DataBase/Finish Authenticate From Google", false, 130)]
+        public static void FinishAuthenticate()
+        {
+            ClientDataBaseDownload.Instance.FinishAuthenticate();
+        }
 
         void Update()
         {
