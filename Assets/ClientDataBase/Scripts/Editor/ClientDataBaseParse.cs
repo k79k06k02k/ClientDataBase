@@ -17,7 +17,7 @@ namespace ClientDataBase
     {
         public class TableData
         {
-            public TableData(string summary, string name, string type, bool isArray, bool isEnd)
+            public TableData(string summary, string name, string type, bool isArray, bool isArrayInLine, bool isEnd)
             {
                 this.summary = summary;
                 this.name = name;
@@ -30,6 +30,7 @@ namespace ClientDataBase
             public string name;
             public string type;
             public bool isArray;
+            public bool isArrayInLine;
             public bool isEnd;
         }
 
@@ -150,19 +151,35 @@ namespace ClientDataBase
             {
                 //透過字元 '[' ']' 判斷是否是Array 
                 bool isArray = variable[i].EndsWith("[]");
+                bool isArrayInLine = variable[i].EndsWith("{}");
                 bool isEnd = i == variable.Length - 1;
 
-                //如果是Array，去除中括號
-                string fieldName = isArray ? variable[i].Replace("[]", "") : variable[i];
+
+                string fieldName = string.Empty;
+
+                //如果是Array，去除括號
+                if(isArray)
+                {
+                    fieldName = variable [i].Replace ("[]", "");
+                } 
+                else if(isArrayInLine)
+                {
+                    fieldName = variable [i].Replace ("{}", "");
+                } 
+                else
+                {
+                    fieldName = variable [i];
+                }
+
 
                 if (dataMap.ContainsKey(fieldName))
                     dataMap[fieldName].summary += ", " + summary[i];
                 else
-                    dataMap.Add(fieldName, new TableData(summary[i], fieldName, type[i], isArray, isEnd));
+                    dataMap.Add(fieldName, new TableData(summary[i], fieldName, type[i], isArray, isArrayInLine, isEnd));
             }
 
             foreach (KeyValuePair<string, TableData> item in dataMap)
-                field.Append(GetProperty(item.Value.summary, item.Value.name, item.Value.type, item.Value.isArray, item.Value.isEnd));
+                field.Append(GetProperty(item.Value.summary, item.Value.name, item.Value.type, item.Value.isArray || item.Value.isArrayInLine, item.Value.isEnd));
 
 
             templateDataClass = templateDataClass.Replace("$MemberFields", field.ToString());
@@ -205,12 +222,25 @@ namespace ClientDataBase
 
                 //透過字元 '[' ']' 判斷是否是Array 
                 bool isArray = variable[i].EndsWith("[]");
+                bool isArrayInLine = variable[i].EndsWith("{}");
 
-                //如果是Array，去除中括號
-                string fieldName = isArray ? variable[i].Replace("[]", "") : variable[i];
+                string fieldName = string.Empty;
+                //如果是Array，去除括號
+                if(isArray)
+                {
+                    fieldName = variable [i].Replace ("[]", "");
+                } 
+                else if(isArrayInLine)
+                {
+                    fieldName = variable [i].Replace ("{}", "");
+                } 
+                else
+                {
+                    fieldName = variable [i];
+                }
 
 
-                resultStr = GetDataClassDetial(i, fieldName, type[i], isArray);
+                resultStr = GetDataClassDetial(i, fieldName, type[i], isArray, isArrayInLine);
 
 
                 //如果名稱一樣(只會發生在複數Array)
@@ -354,12 +384,28 @@ namespace ClientDataBase
         /// <summary>
         /// 實作 TableClass 細部
         /// </summary>
-        string GetDataClassDetial(int index, string name, string type, bool isArray)
+        string GetDataClassDetial(int index, string name, string type, bool isArray, bool isArrayInLine)
         {
-            if (isArray)
-                return string.Format("\t\t\t\t\ttable.{0} = new {1}[] {{ {2} }};\n", name, type, GetTypeDataClass(index, type));
+            if(isArray)
+                return string.Format ("\t\t\t\t\ttable.{0} = new {1}[] {{ {2} }};\n", name, type, GetTypeDataClass (index, type));
+            else if(isArrayInLine)
+                return GetTypeDataClassArray (index, type);
             else
                 return string.Format("\t\t\t\t\ttable.{0} = {1};\n", name, GetTypeDataClass(index, type));
+        }
+
+        string GetTypeDataClassArray(int index, string type)
+        {
+            //TODO: array in line struct
+
+//            string[] temp = ((string)Convert.ChangeType(splitStr[2], typeof(string))).Split(',');
+//            string[] test = new string[temp.Length];
+//            for(int i=0;i<temp.Length;i++)
+//            {
+//                test[i]= (string)Convert.ChangeType(splitStr[3], typeof(string));
+//            }
+
+            return "";
         }
 
 
@@ -367,7 +413,7 @@ namespace ClientDataBase
         ///取得轉型
         /// </summary>
         string GetTypeDataClass(int index, string type)
-        {
+        {           
             switch (type)
             {
                 case "Vector2":
