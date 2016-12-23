@@ -23,6 +23,7 @@ namespace ClientDataBase
                 this.name = name;
                 this.type = type;
                 this.isArray = isArray;
+                this.isArrayInLine = isArrayInLine;
                 this.isEnd = isEnd;
             }
 
@@ -249,7 +250,7 @@ namespace ClientDataBase
                     string oldStr = variableMap[fieldName];
                     string element = Regex.Match(oldStr, "\\{[^\\}]*\\}").ToString().Trim(new char[] { '{', '}', ' ' });
 
-                    string newStr = element + ", " + GetTypeDataClass(i, type[i]);
+                    string newStr = element + ", " + GetTypeDataClass(i.ToString(), type[i], "splitStr");
 
                     variableMap.Remove(fieldName);
 
@@ -387,44 +388,40 @@ namespace ClientDataBase
         string GetDataClassDetial(int index, string name, string type, bool isArray, bool isArrayInLine)
         {
             if(isArray)
-                return string.Format ("\t\t\t\t\ttable.{0} = new {1}[] {{ {2} }};\n", name, type, GetTypeDataClass (index, type));
+                return string.Format ("\t\t\t\t\ttable.{0} = new {1}[] {{ {2} }};\n", name, type, GetTypeDataClass (index.ToString(), type, "splitStr"));
             else if(isArrayInLine)
-                return GetTypeDataClassArray (index, type);
+                return GetDataClassDetialArrayInLine (name, index, type);
             else
-                return string.Format("\t\t\t\t\ttable.{0} = {1};\n", name, GetTypeDataClass(index, type));
+                return string.Format("\t\t\t\t\ttable.{0} = {1};\n", name, GetTypeDataClass(index.ToString(), type, "splitStr"));
         }
 
-        string GetTypeDataClassArray(int index, string type)
+        string GetDataClassDetialArrayInLine(string name, int index, string type)
         {
-            //TODO: array in line struct
-
-//            string[] temp = ((string)Convert.ChangeType(splitStr[2], typeof(string))).Split(',');
-//            string[] test = new string[temp.Length];
-//            for(int i=0;i<temp.Length;i++)
-//            {
-//                test[i]= (string)Convert.ChangeType(splitStr[3], typeof(string));
-//            }
-
-            return "";
+            StringBuilder sb = new StringBuilder();
+            sb.Append(string.Format("\n\t\t\t\t\tstring[] old{0} = ({1}).Split(',');\n", name, GetTypeDataClass(index.ToString(), "string", "splitStr")));
+            sb.Append(string.Format("\t\t\t\t\ttable.{0} = new {1}[old{0}.Length];\n", name, type));
+            sb.Append(string.Format("\t\t\t\t\tfor (int i = 0; i < table.{0}.Length; i++)\n", name));
+            sb.Append(string.Format("\t\t\t\t\t\ttable.{0}[i] = {1};\n", name, GetTypeDataClass("i", type, "old" + name)));
+            return sb.ToString();
         }
 
 
         /// <summary>
         ///取得轉型
         /// </summary>
-        string GetTypeDataClass(int index, string type)
-        {           
+        string GetTypeDataClass(string index, string type, string value)
+        {
             switch (type)
             {
                 case "Vector2":
                 case "Vector3":
-                    return string.Format("Utility.TypeRelate.StringToVector{0}(splitStr[{1}])", (type == "Vector2" ? "2" : "3"), index);
+                    return string.Format("Utility.TypeRelate.StringToVector{0}({1}[{2}])", (type == "Vector2" ? "2" : "3"), value, index);
 
                 case "bool":
-                    return string.Format("Utility.TypeRelate.StringToBool(splitStr[{0}])", index);
+                    return string.Format("Utility.TypeRelate.StringToBool({0}[{1}])", value, index);
 
                 default:
-                    return string.Format("({0})Convert.ChangeType(splitStr[{1}], typeof({0}))", type, index);
+                    return string.Format("({0})Convert.ChangeType({1}[{2}], typeof({0}))", type, value, index);
             }
         }
     }
