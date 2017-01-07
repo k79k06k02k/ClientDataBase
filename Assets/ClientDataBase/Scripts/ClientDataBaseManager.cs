@@ -40,7 +40,7 @@ public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
         m_tableList.Add(type, dataBase);
     }
 
-    public T GetTable<T>() where T : ScriptableObjectBase, new()
+    public T GetTable<T>() where T : ScriptableObjectBase
     {
         if (m_tableList.ContainsKey(typeof(T)))
         {
@@ -48,6 +48,19 @@ public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
         }
 
         return default(T);
+    }
+
+    public U GetData<T, U>(int index) where T : ScriptableObjectBase
+                                      where U : TableClassBase
+    {
+        T t = GetTable<T>();
+
+        if (t != default(T))
+        {
+           return (U)t.GetDataBase(index);
+        }
+
+        return null;
     }
 }
 

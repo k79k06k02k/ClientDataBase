@@ -114,4 +114,9 @@ $DataLoad
             return null;
         }
     }
+
+    public override TableClassBase GetDataBase(int id)
+    {
+        return GetData(id);
+    }
 }
