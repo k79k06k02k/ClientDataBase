@@ -47,7 +47,7 @@ public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
             return (T)m_tableList[typeof(T)];
         }
 
-        return default(T);
+        return null;
     }
 
     public U GetData<T, U>(int index) where T : ScriptableObjectBase
@@ -55,7 +55,7 @@ public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
     {
         T t = GetTable<T>();
 
-        if (t != default(T))
+        if (t != null)
         {
            return (U)t.GetDataBase(index);
         }
