@@ -1,5 +1,5 @@
 ﻿/**********************************************************
-// Author   : K.(k79k06k02k)
+// Author   : Arkai (k79k06k02k)
 // FileName : Singleton.cs
 // Reference: http://wiki.unity3d.com/index.php/Singleton
 **********************************************************/
