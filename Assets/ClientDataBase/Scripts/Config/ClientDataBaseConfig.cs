@@ -2,6 +2,9 @@
 // Author   : Arkai (k79k06k02k)
 // FileName : ClientDataBaseConfig.cs
 **********************************************************/
+using System;
+
+
 namespace ClientDataBase
 {
     public class ClientDataBaseConfig : UnityEngine.ScriptableObject
@@ -141,6 +144,11 @@ namespace ClientDataBase
         public string GetScriptableAssetName(string fileName, bool boolExtension = false)
         {
             return m_nameClassPrefix + fileName + m_nameScriptableAssetSuffix + (boolExtension ? m_extensionAsset : "");
+        }
+
+        public string GetScriptableAssetNameFromType(Type type)
+        {
+            return type.ToString().Replace(m_nameScriptableScriptSuffix, m_nameScriptableAssetSuffix);
         }
     }
 }

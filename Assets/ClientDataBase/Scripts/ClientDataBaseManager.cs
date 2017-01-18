@@ -30,15 +30,17 @@ public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
     {
     }
 
-    ScriptableObjectBase LoadTable(string fileName)
+
+    void Register<T>() where T : ScriptableObjectBase
     {
-        return Utility.AssetRelate.ResourcesLoadCheckNull<ScriptableObjectBase>(c_pathScriptableAssetRoot + m_config.GetScriptableAssetName(fileName));
+        m_tableList.Add(typeof(T), LoadTable(typeof(T)));
     }
 
-    void Register(Type type, ScriptableObjectBase dataBase)
+    ScriptableObjectBase LoadTable(Type type)
     {
-        m_tableList.Add(type, dataBase);
+        return Utility.AssetRelate.ResourcesLoadCheckNull<ScriptableObjectBase>(c_pathScriptableAssetRoot + m_config.GetScriptableAssetNameFromType(type));
     }
+
 
     public T GetTable<T>() where T : ScriptableObjectBase
     {
