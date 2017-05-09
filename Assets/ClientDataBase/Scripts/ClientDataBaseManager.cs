@@ -8,45 +8,40 @@ using ClientDataBase;
 
 public class ClientDataBaseManager : Singleton<ClientDataBaseManager>
 {
-    const string c_pathConfig = "Client DataBase Config";
-    const string c_pathScriptableAssetRoot = "ClientDataBase/";
+    private const string PATH_CONFIG = "Client DataBase Config";
+    private const string PATH_SCRIPTABLE_ASSET_ROOT = "ClientDataBase/";
 
-    ClientDataBaseConfig _config;
-    public ClientDataBaseConfig m_config
+    private ClientDataBaseConfig m_config;
+    public ClientDataBaseConfig Config
     {
         get
         {
-            if (_config == null)
-                _config = Utility.AssetRelate.ResourcesLoadCheckNull<ClientDataBaseConfig>(c_pathConfig);
+            if (m_config == null)
+                m_config = Utility.AssetRelate.ResourcesLoadCheckNull<ClientDataBaseConfig>(PATH_CONFIG);
 
-            return _config;
+            return m_config;
         }
     }
 
-
-    public Dictionary<Type, ScriptableObjectBase> m_tableList = new Dictionary<Type, ScriptableObjectBase>();
-
-    public ClientDataBaseManager()
-    {
-    }
+    private Dictionary<Type, ScriptableObjectBase> m_mapTable = new Dictionary<Type, ScriptableObjectBase>();
 
 
     void Register<T>() where T : ScriptableObjectBase
     {
-        m_tableList.Add(typeof(T), LoadTable(typeof(T)));
+        m_mapTable.Add(typeof(T), LoadTable(typeof(T)));
     }
 
     ScriptableObjectBase LoadTable(Type type)
     {
-        return Utility.AssetRelate.ResourcesLoadCheckNull<ScriptableObjectBase>(c_pathScriptableAssetRoot + m_config.GetScriptableAssetNameFromType(type));
+        return Utility.AssetRelate.ResourcesLoadCheckNull<ScriptableObjectBase>(PATH_SCRIPTABLE_ASSET_ROOT + Config.GetScriptableAssetNameFromType(type));
     }
 
 
     public T GetTable<T>() where T : ScriptableObjectBase
     {
-        if (m_tableList.ContainsKey(typeof(T)))
+        if (m_mapTable.ContainsKey(typeof(T)))
         {
-            return (T)m_tableList[typeof(T)];
+            return (T)m_mapTable[typeof(T)];
         }
 
         return null;

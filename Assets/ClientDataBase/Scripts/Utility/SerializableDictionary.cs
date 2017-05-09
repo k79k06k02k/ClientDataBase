@@ -14,7 +14,7 @@ namespace ClientDataBase
         #region Fields
 
         [System.NonSerialized()]
-        private Dictionary<TKey, TValue> _dict;
+        private Dictionary<TKey, TValue> m_dict;
 
         #endregion
 
@@ -22,52 +22,52 @@ namespace ClientDataBase
 
         public int Count
         {
-            get { return (_dict != null) ? _dict.Count : 0; }
+            get { return (m_dict != null) ? m_dict.Count : 0; }
         }
 
         public void Add(TKey key, TValue value)
         {
-            if (_dict == null) _dict = new Dictionary<TKey, TValue>();
-            _dict.Add(key, value);
+            if (m_dict == null) m_dict = new Dictionary<TKey, TValue>();
+            m_dict.Add(key, value);
         }
 
         public bool ContainsKey(TKey key)
         {
-            if (_dict == null) return false;
-            return _dict.ContainsKey(key);
+            if (m_dict == null) return false;
+            return m_dict.ContainsKey(key);
         }
 
         public ICollection<TKey> Keys
         {
             get
             {
-                if (_dict == null) _dict = new Dictionary<TKey, TValue>();
-                return _dict.Keys;
+                if (m_dict == null) m_dict = new Dictionary<TKey, TValue>();
+                return m_dict.Keys;
             }
         }
 
         public bool Remove(TKey key)
         {
-            if (_dict == null) return false;
-            return _dict.Remove(key);
+            if (m_dict == null) return false;
+            return m_dict.Remove(key);
         }
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            if (_dict == null)
+            if (m_dict == null)
             {
                 value = default(TValue);
                 return false;
             }
-            return _dict.TryGetValue(key, out value);
+            return m_dict.TryGetValue(key, out value);
         }
 
         public ICollection<TValue> Values
         {
             get
             {
-                if (_dict == null) _dict = new Dictionary<TKey, TValue>();
-                return _dict.Values;
+                if (m_dict == null) m_dict = new Dictionary<TKey, TValue>();
+                return m_dict.Values;
             }
         }
 
@@ -75,43 +75,43 @@ namespace ClientDataBase
         {
             get
             {
-                if (_dict == null) throw new KeyNotFoundException();
-                return _dict[key];
+                if (m_dict == null) throw new KeyNotFoundException();
+                return m_dict[key];
             }
             set
             {
-                if (_dict == null) _dict = new Dictionary<TKey, TValue>();
-                _dict[key] = value;
+                if (m_dict == null) m_dict = new Dictionary<TKey, TValue>();
+                m_dict[key] = value;
             }
         }
 
         public void Clear()
         {
-            if (_dict != null) _dict.Clear();
+            if (m_dict != null) m_dict.Clear();
         }
 
         void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
         {
-            if (_dict == null) _dict = new Dictionary<TKey, TValue>();
-            (_dict as ICollection<KeyValuePair<TKey, TValue>>).Add(item);
+            if (m_dict == null) m_dict = new Dictionary<TKey, TValue>();
+            (m_dict as ICollection<KeyValuePair<TKey, TValue>>).Add(item);
         }
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
         {
-            if (_dict == null) return false;
-            return (_dict as ICollection<KeyValuePair<TKey, TValue>>).Contains(item);
+            if (m_dict == null) return false;
+            return (m_dict as ICollection<KeyValuePair<TKey, TValue>>).Contains(item);
         }
 
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            if (_dict == null) return;
-            (_dict as ICollection<KeyValuePair<TKey, TValue>>).CopyTo(array, arrayIndex);
+            if (m_dict == null) return;
+            (m_dict as ICollection<KeyValuePair<TKey, TValue>>).CopyTo(array, arrayIndex);
         }
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
         {
-            if (_dict == null) return false;
-            return (_dict as ICollection<KeyValuePair<TKey, TValue>>).Remove(item);
+            if (m_dict == null) return false;
+            return (m_dict as ICollection<KeyValuePair<TKey, TValue>>).Remove(item);
         }
 
         bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
@@ -121,20 +121,20 @@ namespace ClientDataBase
 
         public Dictionary<TKey, TValue>.Enumerator GetEnumerator()
         {
-            if (_dict == null) return default(Dictionary<TKey, TValue>.Enumerator);
-            return _dict.GetEnumerator();
+            if (m_dict == null) return default(Dictionary<TKey, TValue>.Enumerator);
+            return m_dict.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            if (_dict == null) return Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator();
-            return _dict.GetEnumerator();
+            if (m_dict == null) return Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator();
+            return m_dict.GetEnumerator();
         }
 
         IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
         {
-            if (_dict == null) return Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator();
-            return _dict.GetEnumerator();
+            if (m_dict == null) return Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator();
+            return m_dict.GetEnumerator();
         }
 
         #endregion
@@ -142,47 +142,47 @@ namespace ClientDataBase
         #region ISerializationCallbackReceiver
 
         [UnityEngine.SerializeField()]
-        private TKey[] _keys;
+        private TKey[] m_keys;
         [UnityEngine.SerializeField()]
-        private TValue[] _values;
+        private TValue[] m_values;
 
         void UnityEngine.ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            if (_keys != null && _values != null)
+            if (m_keys != null && m_values != null)
             {
-                if (_dict == null) _dict = new Dictionary<TKey, TValue>(_keys.Length);
-                else _dict.Clear();
-                for (int i = 0; i < _keys.Length; i++)
+                if (m_dict == null) m_dict = new Dictionary<TKey, TValue>(m_keys.Length);
+                else m_dict.Clear();
+                for (int i = 0; i < m_keys.Length; i++)
                 {
-                    if (i < _values.Length)
-                        _dict[_keys[i]] = _values[i];
+                    if (i < m_values.Length)
+                        m_dict[m_keys[i]] = m_values[i];
                     else
-                        _dict[_keys[i]] = default(TValue);
+                        m_dict[m_keys[i]] = default(TValue);
                 }
             }
 
-            _keys = null;
-            _values = null;
+            m_keys = null;
+            m_values = null;
         }
 
         void UnityEngine.ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            if (_dict == null || _dict.Count == 0)
+            if (m_dict == null || m_dict.Count == 0)
             {
-                _keys = null;
-                _values = null;
+                m_keys = null;
+                m_values = null;
             }
             else
             {
-                int cnt = _dict.Count;
-                _keys = new TKey[cnt];
-                _values = new TValue[cnt];
+                int cnt = m_dict.Count;
+                m_keys = new TKey[cnt];
+                m_values = new TValue[cnt];
                 int i = 0;
-                var e = _dict.GetEnumerator();
+                var e = m_dict.GetEnumerator();
                 while (e.MoveNext())
                 {
-                    _keys[i] = e.Current.Key;
-                    _values[i] = e.Current.Value;
+                    m_keys[i] = e.Current.Key;
+                    m_values[i] = e.Current.Value;
                     i++;
                 }
             }

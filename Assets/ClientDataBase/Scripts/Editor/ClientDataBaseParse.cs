@@ -44,7 +44,7 @@ namespace ClientDataBase
         /// </summary>
         public bool LoadGameTable(Object obj)
         {
-            _config = ClientDataBaseManager.Instance.m_config;
+            _config = ClientDataBaseManager.Instance.Config;
             _tableName = obj.name;
 
             string strTemp;
@@ -98,9 +98,9 @@ namespace ClientDataBase
                     if (index == 3)
                     {
                         //1.判斷是否是 GameTable(txt)，檔案的開始字串是否包含 識別字
-                        if (_Summary[0].IndexOf(_config.m_gameTableCheck) < 0)
+                        if (_Summary[0].IndexOf(_config.gameTableCheck) < 0)
                         {
-                            Debug.LogError("GameTable is not a table. Please Check txt file start string is [" + _config.m_gameTableCheck + "]");
+                            Debug.LogError("GameTable is not a table. Please Check txt file start string is [" + _config.gameTableCheck + "]");
                             break;
                         }
 
@@ -325,7 +325,7 @@ namespace ClientDataBase
         /// <returns>是否成功建立</returns>
         public bool CreateScriptableAssets(string scriptableScriptName, string scriptableAssetName)
         {
-            _config = ClientDataBaseManager.Instance.m_config;
+            _config = ClientDataBaseManager.Instance.Config;
             MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(_config.GetScriptableScriptsPath() + scriptableScriptName);
 
             if (script == null || script.GetClass() == null)

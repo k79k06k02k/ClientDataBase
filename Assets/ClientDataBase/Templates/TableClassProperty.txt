@@ -1,6 +1,6 @@
 	/// <summary>
     /// $Summary
     /// </summary>
-    $Modifier $Type $Name { get { return _$Name; } set { _$Name = value; } }
+    $Modifier $Type $Name { get { return m_$Name; } set { m_$Name = value; } }
 	[SerializeField] 
-	private $Type _$Name;
+	private $Type m_$Name;

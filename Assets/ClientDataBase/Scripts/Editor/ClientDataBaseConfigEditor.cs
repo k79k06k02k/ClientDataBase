@@ -19,30 +19,30 @@ namespace ClientDataBase
             GUILayout.Space(15);
             EditorGUILayout.BeginVertical(GUI.skin.box);
             EditorGUILayout.LabelField("Check", EditorStyles.boldLabel);
-            _script.m_gameTableCheck = DrawNormalField("Game Table Check", _script.m_gameTableCheck);
+            _script.gameTableCheck = DrawNormalField("Game Table Check", _script.gameTableCheck);
             EditorGUILayout.EndVertical();
 
 
             GUILayout.Space(15);
             EditorGUILayout.BeginVertical(GUI.skin.box);
             EditorGUILayout.LabelField("Path", EditorStyles.boldLabel);
-            _script.m_root = DrawNormalField("ROOT", _script.m_root);
-            _script.m_pathScriptTemplates = DrawPathField("Script Templates Path", _script.m_pathScriptTemplates);
-            _script.m_pathGameTable = DrawPathField("Game Table Path", _script.m_pathGameTable);
-            _script.m_pathTableClass = DrawPathField("Table Class Path", _script.m_pathTableClass);
-            _script.m_pathScriptableAsset = DrawPathField("Scriptable Asset Path", _script.m_pathScriptableAsset);
-            _script.m_pathScriptableScripts = DrawPathField("Scriptable Scripts Path", _script.m_pathScriptableScripts);
-            _script.m_pathScriptableEditor = DrawPathField("Scriptable Editor Path", _script.m_pathScriptableEditor);
+            _script.root = DrawNormalField("ROOT", _script.root);
+            _script.pathScriptTemplates = DrawPathField("Script Templates Path", _script.pathScriptTemplates);
+            _script.pathGameTable = DrawPathField("Game Table Path", _script.pathGameTable);
+            _script.pathTableClass = DrawPathField("Table Class Path", _script.pathTableClass);
+            _script.pathScriptableAsset = DrawPathField("Scriptable Asset Path", _script.pathScriptableAsset);
+            _script.pathScriptableScripts = DrawPathField("Scriptable Scripts Path", _script.pathScriptableScripts);
+            _script.pathScriptableEditor = DrawPathField("Scriptable Editor Path", _script.pathScriptableEditor);
             EditorGUILayout.EndVertical();
 
 
             GUILayout.Space(15);
             EditorGUILayout.BeginVertical(GUI.skin.box);
             EditorGUILayout.LabelField("Name", EditorStyles.boldLabel);
-            _script.m_nameClassPrefix = DrawNameField("Class Name Prefix", "Preview: " + _script.m_nameClassPrefix + "[FileName]", _script.m_nameClassPrefix);
-            _script.m_nameScriptableAssetSuffix = DrawNameField("Scriptable Asset Suffix", "Preview: " + _script.m_nameClassPrefix + "[FileName]" + _script.m_nameScriptableAssetSuffix, _script.m_nameScriptableAssetSuffix);
-            _script.m_nameScriptableScriptSuffix = DrawNameField("Scriptable Script Suffix", "Preview: " + _script.m_nameClassPrefix + "[FileName]" + _script.m_nameScriptableScriptSuffix, _script.m_nameScriptableScriptSuffix);
-            _script.m_nameScriptableEditorSuffix = DrawNameField("Scriptable Editor Suffix", "Preview: " + _script.m_nameClassPrefix + "[FileName]" + _script.m_nameScriptableEditorSuffix, _script.m_nameScriptableEditorSuffix);
+            _script.nameClassPrefix = DrawNameField("Class Name Prefix", "Preview: " + _script.nameClassPrefix + "[FileName]", _script.nameClassPrefix);
+            _script.nameScriptableAssetSuffix = DrawNameField("Scriptable Asset Suffix", "Preview: " + _script.nameClassPrefix + "[FileName]" + _script.nameScriptableAssetSuffix, _script.nameScriptableAssetSuffix);
+            _script.nameScriptableScriptSuffix = DrawNameField("Scriptable Script Suffix", "Preview: " + _script.nameClassPrefix + "[FileName]" + _script.nameScriptableScriptSuffix, _script.nameScriptableScriptSuffix);
+            _script.nameScriptableEditorSuffix = DrawNameField("Scriptable Editor Suffix", "Preview: " + _script.nameClassPrefix + "[FileName]" + _script.nameScriptableEditorSuffix, _script.nameScriptableEditorSuffix);
             EditorGUILayout.EndVertical();
 
             EditorUtility.SetDirty(_script);

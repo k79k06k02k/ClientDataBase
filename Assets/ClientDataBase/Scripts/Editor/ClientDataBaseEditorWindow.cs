@@ -51,7 +51,7 @@ namespace ClientDataBase
         public static void UpdateAll()
         {
             ClientDataBaseEditorWindow window = EditorWindow.GetWindow<ClientDataBaseEditorWindow>();
-            window._objList = UtilityEditor.LoadAllAssetsAtPath(ClientDataBaseManager.Instance.m_config.GetGameTablePath()).ToList();
+            window._objList = UtilityEditor.LoadAllAssetsAtPath(ClientDataBaseManager.Instance.Config.GetGameTablePath()).ToList();
 
             if (window._objList.Count == 0)
             {
@@ -91,8 +91,8 @@ namespace ClientDataBase
                         {
                             string path = AssetDatabase.GetAssetPath(go);
                             string fileName = Path.GetFileNameWithoutExtension(path);
-                            string scriptableScriptName = ClientDataBaseManager.Instance.m_config.GetScriptableScriptName(fileName, true);
-                            string scriptableAssetName = ClientDataBaseManager.Instance.m_config.GetScriptableAssetName(fileName, true);
+                            string scriptableScriptName = ClientDataBaseManager.Instance.Config.GetScriptableScriptName(fileName, true);
+                            string scriptableAssetName = ClientDataBaseManager.Instance.Config.GetScriptableAssetName(fileName, true);
 
                             _intNowCount++;
                             UpdateProgressBar("Generate Scriptable Assets", string.Format("[File Name:{0}]", scriptableAssetName));
@@ -281,10 +281,10 @@ namespace ClientDataBase
             switch (_intTabIndex)
             {
                 case 0:
-                    return extension != ClientDataBaseManager.Instance.m_config.m_extensionTxt || ((TextAsset)obj).ToString().StartsWith(ClientDataBaseManager.Instance.m_config.m_gameTableCheck) == false;
+                    return extension != ClientDataBaseManager.Instance.Config.extensionTxt || ((TextAsset)obj).ToString().StartsWith(ClientDataBaseManager.Instance.Config.gameTableCheck) == false;
 
                 case 1:
-                    return extension != ClientDataBaseManager.Instance.m_config.m_extensionAsset || obj.name == ClientDataBaseManager.Instance.m_config.name;
+                    return extension != ClientDataBaseManager.Instance.Config.extensionAsset || obj.name == ClientDataBaseManager.Instance.Config.name;
 
                 default:
                     return true;
@@ -302,7 +302,7 @@ namespace ClientDataBase
             {
                 case 0:
                     sb.Append("1.Asset in Project" + "\n");
-                    sb.Append("2.Asset extension must [" + ClientDataBaseManager.Instance.m_config.m_extensionTxt + "]" + "\n");
+                    sb.Append("2.Asset extension must [" + ClientDataBaseManager.Instance.Config.extensionTxt + "]" + "\n");
                     sb.Append("3.Asset content must table.");
                     break;
 

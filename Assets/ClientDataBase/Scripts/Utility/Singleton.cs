@@ -8,23 +8,23 @@ namespace ClientDataBase
 {
     public class Singleton<T> where T : class, new()
     {
-        private static T _instance;
+        private static T m_instance;
 
-        private static object _lock = new object();
+        private static object m_lock = new object();
 
         public static T Instance
         {
             get
             {
                 //多執行緒
-                lock (_lock)
+                lock (m_lock)
                 {
-                    if (_instance == null)
+                    if (m_instance == null)
                     {
-                        _instance = new T();
+                        m_instance = new T();
                     }
 
-                    return _instance;
+                    return m_instance;
                 }
             }
         }
