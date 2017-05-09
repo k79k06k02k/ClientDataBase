@@ -11,18 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5c24b43a199654aa132f2da4e5ac8a, type: 3}
   m_Name: Client DataBase Config
   m_EditorClassIdentifier: 
-  m_gameTableCheck: '##'
-  m_root: Assets/ClientDataBase/
-  m_pathScriptTemplates: Templates/
-  m_pathGameTable: GameTable/
-  m_pathTableClass: Generate/TableClass/
-  m_pathScriptableAsset: Generate/Resources/ClientDataBase/
-  m_pathScriptableScripts: Generate/Scriptable/Script/
-  m_pathScriptableEditor: Generate/Scriptable/Editor/
-  m_nameClassPrefix: Table
-  m_nameScriptableAssetSuffix: Asset
-  m_nameScriptableScriptSuffix: Scriptable
-  m_nameScriptableEditorSuffix: ScriptableEditor
-  m_extensionTxt: .txt
-  m_extensionCs: .cs
-  m_extensionAsset: .asset
+  gameTableCheck: '##'
+  root: Assets/ClientDataBase/
+  pathScriptTemplates: Templates/
+  pathGameTable: GameTable/
+  pathTableClass: Generate/TableClass/
+  pathScriptableAsset: Generate/Resources/ClientDataBase/
+  pathScriptableScripts: Generate/Scriptable/Script/
+  pathScriptableEditor: Generate/Scriptable/Editor/
+  nameClassPrefix: Table
+  nameScriptableAssetSuffix: Asset
+  nameScriptableScriptSuffix: Scriptable
+  nameScriptableEditorSuffix: ScriptableEditor
+  extensionTxt: .txt
+  extensionCs: .cs
+  extensionAsset: .asset
