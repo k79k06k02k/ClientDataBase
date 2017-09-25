@@ -277,11 +277,12 @@ namespace ClientDataBase
         {
             string path = AssetDatabase.GetAssetPath(obj);
             string extension = Path.GetExtension(path);
+            string content = File.ReadAllText(path);
 
             switch (m_tabIndex)
             {
                 case 0:
-                    return extension != ClientDataBaseManager.Instance.Config.extensionTxt || ((TextAsset)obj).ToString().StartsWith(ClientDataBaseManager.Instance.Config.gameTableCheck) == false;
+                    return extension != ClientDataBaseManager.Instance.Config.extensionTsv || content.StartsWith(ClientDataBaseManager.Instance.Config.gameTableCheck) == false;
 
                 case 1:
                     return extension != ClientDataBaseManager.Instance.Config.extensionAsset || obj.name == ClientDataBaseManager.Instance.Config.name;
@@ -302,7 +303,7 @@ namespace ClientDataBase
             {
                 case 0:
                     sb.Append("1.Asset in Project" + "\n");
-                    sb.Append("2.Asset extension must [" + ClientDataBaseManager.Instance.Config.extensionTxt + "]" + "\n");
+                    sb.Append("2.Asset extension must [" + ClientDataBaseManager.Instance.Config.extensionTsv + "]" + "\n");
                     sb.Append("3.Asset content must table.");
                     break;
 

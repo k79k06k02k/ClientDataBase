@@ -29,20 +29,20 @@ public class $ScriptableName : ScriptableObjectBase
 		mapTable.Clear();
 
 		m_clientDataBaseConfig = ClientDataBaseManager.Instance.Config;
-        path = m_clientDataBaseConfig.GetGameTablePathName(gameTableName);
+        path = Application.dataPath.Replace("Assets","") + m_clientDataBaseConfig.GetGameTablePathName(gameTableName);
 
-        TextAsset data = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
+        string content = File.ReadAllText(path);
         StringReader reader = null;
         int index = 0;
         string strTemp;
 
-        if (data == null)
+        if (string.IsNullOrEmpty(content))
         {
-            Debug.LogError(string.Format("Can't found GameTable txt file in [Path:{0}]", path));
+            Debug.LogError(string.Format("Can't found GameTable file in [Path:{0}]", path));
             return false;
         }
 
-        reader = new StringReader(data.text);
+        reader = new StringReader(content);
 
         if (reader != null)
         {

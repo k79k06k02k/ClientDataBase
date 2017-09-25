@@ -48,7 +48,8 @@ namespace ClientDataBase
             m_tableName = obj.name;
 
             string strTemp;
-            TextAsset data = (TextAsset)obj;
+            string path = AssetDatabase.GetAssetPath(obj);
+            string content = File.ReadAllText(path);
             TextReader reader = null;
 
             string[] _Summary = null;
@@ -57,19 +58,19 @@ namespace ClientDataBase
             int index = 0;
 
 
-            if (data == null)
+            if (content == null)
             {
                 Debug.LogError("GameTable is null.");
                 return false;
             }
 
-            if (data.text == string.Empty)
+            if (content == string.Empty)
             {
                 Debug.LogError("GameTable is empty.");
                 return false;
             }
 
-            reader = new StringReader(data.text);
+            reader = new StringReader(content);
             if (reader != null)
             {
                 while ((strTemp = reader.ReadLine()) != null)
@@ -159,17 +160,17 @@ namespace ClientDataBase
                 string fieldName = string.Empty;
 
                 //如果是Array，去除括號
-                if(isArray)
+                if (isArray)
                 {
-                    fieldName = variable [i].Replace ("[]", "");
-                } 
-                else if(isArrayInLine)
+                    fieldName = variable[i].Replace("[]", "");
+                }
+                else if (isArrayInLine)
                 {
-                    fieldName = variable [i].Replace ("{}", "");
-                } 
+                    fieldName = variable[i].Replace("{}", "");
+                }
                 else
                 {
-                    fieldName = variable [i];
+                    fieldName = variable[i];
                 }
 
 
@@ -227,17 +228,17 @@ namespace ClientDataBase
 
                 string fieldName = string.Empty;
                 //如果是Array，去除括號
-                if(isArray)
+                if (isArray)
                 {
-                    fieldName = variable [i].Replace ("[]", "");
-                } 
-                else if(isArrayInLine)
+                    fieldName = variable[i].Replace("[]", "");
+                }
+                else if (isArrayInLine)
                 {
-                    fieldName = variable [i].Replace ("{}", "");
-                } 
+                    fieldName = variable[i].Replace("{}", "");
+                }
                 else
                 {
-                    fieldName = variable [i];
+                    fieldName = variable[i];
                 }
 
 
@@ -254,13 +255,13 @@ namespace ClientDataBase
 
                     variableMap.Remove(fieldName);
 
-                    try 
+                    try
                     {
                         variableMap.Add(fieldName, oldStr.Replace(element, newStr));
                     }
                     catch (ArgumentException e)
                     {
-                        Debug.LogError (string.Format ("Duplicate variable name and is not Array, table:[{0}], variable name:[{1}].", m_tableName, fieldName));
+                        Debug.LogError(string.Format("Duplicate variable name and is not Array, table:[{0}], variable name:[{1}].", m_tableName, fieldName));
                         return false;
                     }
                 }
@@ -347,7 +348,7 @@ namespace ClientDataBase
 
             //資料讀取
             ScriptableObjectBase scriptableObjectBase = AssetDatabase.LoadAssetAtPath<ScriptableObjectBase>(path);
-            
+
             return scriptableObjectBase.LoadGameTable();
         }
 
@@ -387,10 +388,10 @@ namespace ClientDataBase
         /// </summary>
         string GetDataClassDetial(int index, string name, string type, bool isArray, bool isArrayInLine)
         {
-            if(isArray)
-                return string.Format ("\t\t\t\t\ttable.{0} = new {1}[] {{ {2} }};\n", name, type, GetTypeDataClass (index.ToString(), type, "splitStr"));
-            else if(isArrayInLine)
-                return GetDataClassDetialArrayInLine (name, index, type);
+            if (isArray)
+                return string.Format("\t\t\t\t\ttable.{0} = new {1}[] {{ {2} }};\n", name, type, GetTypeDataClass(index.ToString(), type, "splitStr"));
+            else if (isArrayInLine)
+                return GetDataClassDetialArrayInLine(name, index, type);
             else
                 return string.Format("\t\t\t\t\ttable.{0} = {1};\n", name, GetTypeDataClass(index.ToString(), type, "splitStr"));
         }

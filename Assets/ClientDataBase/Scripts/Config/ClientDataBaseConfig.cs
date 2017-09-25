@@ -74,19 +74,24 @@ namespace ClientDataBase
 
 
         /// <summary>
-        /// 附檔名 .cs
+        /// 附檔名 .tsv
         /// </summary>
-        public string extensionTxt = ".txt";
+        public readonly string extensionTsv = ".tsv";
+
+        /// <summary>
+        /// 附檔名 .txt
+        /// </summary>
+        public readonly string extensionTxt = ".txt";
 
         /// <summary>
         /// 附檔名 .cs
         /// </summary>
-        public string extensionCs = ".cs";
+        public readonly string extensionCs = ".cs";
 
         /// <summary>
         /// 附檔名 .asset
         /// </summary>
-        public string extensionAsset = ".asset";
+        public readonly string extensionAsset = ".asset";
 
 
         public string GetTemplatePathName(string name)
@@ -96,7 +101,7 @@ namespace ClientDataBase
 
         public string GetGameTablePathName(string name)
         {
-            return root + pathGameTable + name + extensionTxt;
+            return root + pathGameTable + name + extensionTsv;
         }
 
         public string GetGameTablePath()
