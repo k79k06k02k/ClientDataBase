@@ -52,6 +52,7 @@ namespace ClientDataBase
             string content = File.ReadAllText(path);
             TextReader reader = null;
 
+            string[] _Export = null;
             string[] _Summary = null;
             string[] _Variable = null;
             string[] _Type = null;
@@ -77,29 +78,36 @@ namespace ClientDataBase
                 {
                     if (index == 0)
                     {
-                        _Summary = strTemp.Split("\t"[0]);
+                        _Export = strTemp.Split("\t"[0]);
                         index++;
                         continue;
                     }
 
                     if (index == 1)
                     {
-                        _Variable = strTemp.Split("\t"[0]);
+                        _Summary = strTemp.Split("\t"[0]);
                         index++;
                         continue;
                     }
 
                     if (index == 2)
                     {
-                        _Type = strTemp.Split("\t"[0]);
+                        _Variable = strTemp.Split("\t"[0]);
                         index++;
                         continue;
                     }
 
                     if (index == 3)
                     {
+                        _Type = strTemp.Split("\t"[0]);
+                        index++;
+                        continue;
+                    }
+
+                    if (index == 4)
+                    {
                         //1.判斷是否是 GameTable(txt)，檔案的開始字串是否包含 識別字
-                        if (_Summary[0].IndexOf(m_config.gameTableCheck) < 0)
+                        if (_Export[0].IndexOf(m_config.gameTableCheck) < 0)
                         {
                             Debug.LogError("GameTable is not a table. Please Check txt file start string is [" + m_config.gameTableCheck + "]");
                             break;
@@ -113,10 +121,10 @@ namespace ClientDataBase
                             break;
                         }
 
-                        if (CreateTableScript(_Summary, _Variable, _Type) == false)
+                        if (CreateTableScript(_Export, _Summary, _Variable, _Type) == false)
                             return false;
 
-                        if (CreateScriptableScript(_Variable, _Type) == false)
+                        if (CreateScriptableScript(_Export ,_Variable, _Type) == false)
                             return false;
 
                         if (CreateScriptableScriptEditor() == false)
@@ -137,7 +145,7 @@ namespace ClientDataBase
         /// 建立 Table Class
         /// </summary>
         /// <returns>是否成功建立</returns>
-        bool CreateTableScript(string[] summary, string[] variable, string[] type)
+        bool CreateTableScript(string[] export, string[] summary, string[] variable, string[] type)
         {
             Dictionary<string, TableData> dataMap = new Dictionary<string, TableData>();
 
@@ -151,6 +159,11 @@ namespace ClientDataBase
 
             for (int i = m_startRow; i < variable.Length; i++)
             {
+                if (export[i] == "0")
+                {
+                    continue;
+                }
+
                 //透過字元 '[' ']' 判斷是否是Array 
                 bool isArray = variable[i].EndsWith("[]");
                 bool isArrayInLine = variable[i].EndsWith("{}");
@@ -204,7 +217,7 @@ namespace ClientDataBase
         /// 建立 Scriptable Script
         /// </summary>
         /// <returns>是否成功建立</returns>
-        bool CreateScriptableScript(string[] variable, string[] type)
+        bool CreateScriptableScript(string[] export, string[] variable, string[] type)
         {
             string template = GetTemplate("Scriptable");
             if (string.IsNullOrEmpty(template))
@@ -220,6 +233,11 @@ namespace ClientDataBase
 
             for (int i = m_startRow; i < variable.Length; i++)
             {
+                if (export[i] == "0")
+                {
+                    continue;
+                }
+
                 string resultStr = string.Empty;
 
                 //透過字元 '[' ']' 判斷是否是Array 

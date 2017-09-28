@@ -48,7 +48,7 @@ public class $ScriptableName : ScriptableObjectBase
         {
             while ((strTemp = reader.ReadLine()) != null)
 			{        
-				if (index <= 2)
+				if (index < 4)
 				{
 					index++;
 					continue;
