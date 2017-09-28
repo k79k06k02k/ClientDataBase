@@ -1,8 +1,4 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : ClientDataBaseParse.cs
-**********************************************************/
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using Object = UnityEngine.Object;
 using System.IO;
@@ -11,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System;
 
-namespace ClientDataBase
+namespace ClientDataBase.Editor
 {
     public class ClientDataBaseParse : Singleton<ClientDataBaseParse>
     {
@@ -434,10 +430,10 @@ namespace ClientDataBase
             {
                 case "Vector2":
                 case "Vector3":
-                    return string.Format("Utility.TypeRelate.StringToVector{0}({1}[{2}])", (type == "Vector2" ? "2" : "3"), value, index);
+                    return string.Format("Utilities.TypeRelate.StringToVector{0}({1}[{2}])", (type == "Vector2" ? "2" : "3"), value, index);
 
                 case "bool":
-                    return string.Format("Utility.TypeRelate.StringToBool({0}[{1}])", value, index);
+                    return string.Format("Utilities.TypeRelate.StringToBool({0}[{1}])", value, index);
 
                 default:
                     return string.Format("({0})Convert.ChangeType({1}[{2}], typeof({0}))", type, value, index);

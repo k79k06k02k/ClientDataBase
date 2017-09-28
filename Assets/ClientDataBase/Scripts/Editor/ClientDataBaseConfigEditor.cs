@@ -1,12 +1,9 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : ClientDataBaseConfigEditor.cs
-**********************************************************/
-using UnityEngine;
-using UnityEditor;
+﻿using UnityEngine;
 
-namespace ClientDataBase
+namespace ClientDataBase.Editor
 {
+    using UnityEditor;
+
     [CustomEditor(typeof(ClientDataBaseConfig))]
     public class ClientDataBaseConfigEditor : Editor
     {

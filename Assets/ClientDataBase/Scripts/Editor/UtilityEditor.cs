@@ -1,11 +1,7 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : UtilityEditor.cs
-**********************************************************/
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
-namespace ClientDataBase
+namespace ClientDataBase.Editor
 {
     public class UtilityEditor
     {

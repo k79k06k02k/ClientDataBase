@@ -1,8 +1,4 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : TableClassBase.cs
-**********************************************************/
-namespace ClientDataBase
+﻿namespace ClientDataBase
 {
     public class TableClassBase { }
 }

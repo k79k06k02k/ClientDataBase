@@ -1,7 +1,3 @@
-/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : ClientDataBaseEditorWindow.cs
-**********************************************************/
 using UnityEngine;
 using UnityEditor;
 using System.IO;
@@ -9,7 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ClientDataBase
+namespace ClientDataBase.Editor
 {
     public class ClientDataBaseEditorWindow : EditorWindow
     {

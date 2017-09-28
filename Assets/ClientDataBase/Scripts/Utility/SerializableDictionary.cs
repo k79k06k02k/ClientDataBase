@@ -1,8 +1,4 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : SerializableDictionary.cs
-**********************************************************/
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace ClientDataBase

@@ -6,7 +6,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-namespace ClientDataBase
+namespace ClientDataBase.Editor
 {
     public class UnsafeSecurityPolicy
     {

@@ -1,8 +1,4 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : ClientDataBaseConfig.cs
-**********************************************************/
-using System;
+﻿using System;
 
 
 namespace ClientDataBase

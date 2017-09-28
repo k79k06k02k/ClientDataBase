@@ -1,12 +1,8 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : Utility.cs
-**********************************************************/
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ClientDataBase
 {
-    public class Utility
+    public class Utilities
     {
         public struct TypeRelate
         {

@@ -1,8 +1,4 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : ScriptableObjectBase.cs
-**********************************************************/
-namespace ClientDataBase
+﻿namespace ClientDataBase
 {
     public abstract class ScriptableObjectBase : UnityEngine.ScriptableObject
     {

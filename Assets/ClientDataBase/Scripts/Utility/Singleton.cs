@@ -1,10 +1,4 @@
-﻿/**********************************************************
-// Author   : Arkai (k79k06k02k)
-// FileName : Singleton.cs
-// Reference: http://wiki.unity3d.com/index.php/Singleton
-**********************************************************/
-
-namespace ClientDataBase
+﻿namespace ClientDataBase
 {
     public class Singleton<T> where T : class, new()
     {
