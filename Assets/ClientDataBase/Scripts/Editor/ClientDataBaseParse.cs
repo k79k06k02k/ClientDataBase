@@ -350,18 +350,19 @@ namespace ClientDataBase.Editor
             }
 
             string path = m_config.GetScriptableAssetPath() + scriptableAssetName;
-            UtilityEditor.CreateFolder(m_config.GetScriptableAssetPath());
+            ScriptableObjectBase scriptableObjectBase = AssetDatabase.LoadAssetAtPath<ScriptableObjectBase>(path);
+            if (scriptableObjectBase == null)
+            {
+                UtilityEditor.CreateFolder(m_config.GetScriptableAssetPath());
 
-            Object _Object = ScriptableObject.CreateInstance(script.GetClass());
-            AssetDatabase.CreateAsset(_Object, path);
+                scriptableObjectBase = ScriptableObject.CreateInstance(script.GetClass()) as ScriptableObjectBase;
+                AssetDatabase.CreateAsset(scriptableObjectBase, path);
 
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            }
 
             Debug.Log(string.Format("[Scriptable Asset] is Create.\nFile:[{0}] Path:[{1}]", scriptableAssetName, m_config.GetScriptableAssetPath()));
-
-            //資料讀取
-            ScriptableObjectBase scriptableObjectBase = AssetDatabase.LoadAssetAtPath<ScriptableObjectBase>(path);
 
             return scriptableObjectBase.LoadGameTable();
         }
