@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ClientDataBase
 {
@@ -28,10 +29,23 @@ namespace ClientDataBase
                 string[] str = value.Split(',');
                 return new Vector3(float.Parse(str[0]), float.Parse(str[1]), float.Parse(str[2]));
             }
+            public static float StringToFloat(string value)
+            {
+                string temp = string.Empty;
+                if (value.Contains("%"))
+                {
+                    return (float)Convert.ChangeType(value.Replace("%", ""), typeof(float)) * 0.01f;
+                }
+                else
+                {
+                    return (float)Convert.ChangeType(value, typeof(float));
+                }
+            }
         }
+    }
 
 
-        public struct AssetRelate
+    public struct AssetRelate
         {
             /// <summary>
             /// Resources.Load 並檢查是否null

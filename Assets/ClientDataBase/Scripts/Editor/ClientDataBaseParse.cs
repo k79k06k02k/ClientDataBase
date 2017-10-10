@@ -436,6 +436,9 @@ namespace ClientDataBase.Editor
                 case "bool":
                     return string.Format("Utilities.TypeRelate.StringToBool({0}[{1}])", value, index);
 
+                case "float":
+                    return string.Format("Utilities.TypeRelate.StringToFloat({0}[{1}])", value, index);
+
                 default:
                     return string.Format("({0})Convert.ChangeType({1}[{2}], typeof({0}))", type, value, index);
             }
