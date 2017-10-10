@@ -42,10 +42,9 @@ namespace ClientDataBase
                 }
             }
         }
-    }
 
 
-    public struct AssetRelate
+        public struct AssetRelate
         {
             /// <summary>
             /// Resources.Load 並檢查是否null
