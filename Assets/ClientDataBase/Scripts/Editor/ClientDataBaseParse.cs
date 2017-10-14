@@ -33,7 +33,7 @@ namespace ClientDataBase.Editor
 
         private string m_tableName;
         private ClientDataBaseConfig m_config;
-        private int m_startRow = 2;
+        private int m_startRow = 1;
 
         /// <summary>
         /// 讀取GameTable(.txt)
