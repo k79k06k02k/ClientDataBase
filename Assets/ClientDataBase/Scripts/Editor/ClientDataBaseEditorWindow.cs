@@ -61,17 +61,6 @@ namespace ClientDataBase.Editor
             window.m_isExecuteButtonClick = true;
         }
 
-        [MenuItem("Assets/Client DataBase/Init Authenticate From Google", false, 130)]
-        public static void InitAuthenticate()
-        {
-            ClientDataBaseDownload.Instance.InitAuthenticate();
-        }
-        [MenuItem("Assets/Client DataBase/Finish Authenticate From Google", false, 130)]
-        public static void FinishAuthenticate()
-        {
-            ClientDataBaseDownload.Instance.FinishAuthenticate();
-        }
-
         void Update()
         {
             //等待 Application Compiling Script，建立 ScriptableObject Asset
